@@ -1,0 +1,9 @@
+@let menuItems_ = menuItems();
+
+<div class="flex gap-2 w-full flex-wrap">
+@for (item of menuItems_; track $index) {
+
+<app-menu-board-item [item]="item" class="w-[300px] min-w-[300px] h-[100px]" (itemSelected)="itemSelected(item)"></app-menu-board-item>
+}
+
+</div>

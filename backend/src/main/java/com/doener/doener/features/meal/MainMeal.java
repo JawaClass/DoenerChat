@@ -27,7 +27,7 @@ public class MainMeal extends BaseMeal {
     @OneToMany(mappedBy = "mainMeal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MealExtra> extras;
 
-    public List<MealExtra> addExtra(MealExtra... extrasToAdd) {
+    public List<MealExtra> addExtra(List<MealExtra> extrasToAdd) {
     if (this.extras == null) {
         this.extras = new ArrayList<>();
     }

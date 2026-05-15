@@ -1,0 +1,6 @@
+@let item_ = item();
+@let bgColor_ = bgColor();
+<div class="flex flex-col gap-2 bg-amber-700 w-full h-full border-2 border-r-8 cursor-pointer rounded-md p-1" [ngClass]="bgColor_" (click)="itemSelected.emit()">
+    <span class="font-semibold text-xl">{{item_.name}}</span>
+    <span>{{item_.category}}</span>
+</div>

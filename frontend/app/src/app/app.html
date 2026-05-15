@@ -1,0 +1,6 @@
+@let items_ = items();
+
+<div class="w-full h-full flex gap-2">
+    <app-customer-order-summary class="flex-1 w-full"></app-customer-order-summary>
+    <app-menu-board class="m-[20px] w-full flex-4" [menuItems]="items_"></app-menu-board>
+</div>

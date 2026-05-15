@@ -1,0 +1,22 @@
+
+@let item_ = item();
+<div class="flex-col gap-1 bg-amber-200">
+
+    <div class="w-full flex justify-between">
+        <div class="text-xl font-bold">{{item_.item.name}}</div>
+        <mat-checkbox class="example-margin" [checked]="item_.active" (change)="toggleIsActive()"/>
+    </div>
+
+    <div class="text-gray-800">{{item_.item.preparationTime}}</div>
+
+    <div class="text-gray-800">{{item_.item.price}}</div>
+
+    <button matFab aria-label="Example icon button with a delete icon">
+        <svg lucideFileText></svg>
+    </button>
+
+    <button matFab (click)="delete()">
+        <svg lucideTrash></svg>
+    </button>
+
+</div>

@@ -9,6 +9,12 @@ ARG GRADLE_VERSION=""
 RUN if [ "${INSTALL_MAVEN}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/sdkman/bin/sdkman-init.sh && sdk install maven \"${MAVEN_VERSION}\""; fi \
     && if [ "${INSTALL_GRADLE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/sdkman/bin/sdkman-init.sh && sdk install gradle \"${GRADLE_VERSION}\""; fi
 
+# # Install Node.js (LTS)
+# ARG NODE_VERSION="24"
+# RUN apt-get update && apt-get install -y curl \
+#     && curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+#     && apt-get install -y nodejs \
+#     && npm install -g @angular/cli
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>

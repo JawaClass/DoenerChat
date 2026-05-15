@@ -1,0 +1,11 @@
+@let item_ = item();
+<div class="flex justify-between w-full bg-yellow-600">
+    <span>{{item_.name}}</span>
+    <span>{{item_.items.length}} x</span>
+</div>
+
+<div class="flex flex-col gap-1">
+    @for (item of item_.items; track $index) {
+            <app-basket-item-display [item]="item" ></app-basket-item-display>
+    }
+</div>
