@@ -1,0 +1,6 @@
+<mat-button-toggle-group (change)="modeChanged.emit($event.value)" [value]="selectedMode()">
+    @for (item of displayModes; track $index) {
+
+    <mat-button-toggle [value]="item.mode">{{item.text}}</mat-button-toggle>
+    }
+</mat-button-toggle-group>

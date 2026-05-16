@@ -1,8 +1,14 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { MenuBoardItem } from './menu-board-item/menu-board-item';
-import { MenuItem } from '../models';
-import { OrderSelectionService } from '../order-selection-service';
+import { DisplayModeType } from '../menuboard-display-mode/menuboard-display-mode';
 
+
+export interface MenuBoardDisplayItem<TData = any> {
+  title: string
+  subtitle?: string
+  mode: DisplayModeType
+  item: TData
+}
 @Component({
   selector: 'app-menu-board',
   imports: [MenuBoardItem],
@@ -11,13 +17,9 @@ import { OrderSelectionService } from '../order-selection-service';
 })
 export class MenuBoard {
 
-  readonly menuItems = input.required<MenuItem[]>()
+  readonly menuItems = input.required<MenuBoardDisplayItem[]>()
 
-  private readonly service = inject(OrderSelectionService)
+  readonly itemSelected = output<MenuBoardDisplayItem>()
 
-  itemSelected(item: MenuItem) {
-    this.service.add(item)
-
-  }
 
 }

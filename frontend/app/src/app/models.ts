@@ -8,5 +8,6 @@ export interface MenuItem {
     currency: Currency
     available: boolean
     preparationTime: number
+    calories: number
 
 }

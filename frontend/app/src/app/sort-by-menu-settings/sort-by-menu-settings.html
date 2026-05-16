@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-2 m-2 mr-6">
+    @for (field of sortByFields(); track field.field) {
+
+        <div class="flex gap-2 items-center">
+            <mat-checkbox [checked]="field.active" (change)="checkChanged($event, field)">
+                    <span>{{field.text}}</span>
+            </mat-checkbox>
+            <button mat-icon-button (click)="toggleDir($event, field)" [disabled]="!field.active">
+                <svg [lucideIcon]="field.icon" ></svg>
+            </button>
+        </div>
+
+    }
+</div>

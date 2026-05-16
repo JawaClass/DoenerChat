@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Menüeintrag</h2>
+
+<mat-dialog-content>
+
+<div class="flex flex-col gap-2 h-full m-4">
+
+    <mat-form-field class="w-full">
+        <mat-label>Name</mat-label>
+        <input matInput [formField]="itemForm.name">
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Kategorie</mat-label>
+        <input matInput [formField]="itemForm.category">
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Preis</mat-label>
+        <input type="number" matInput [formField]="itemForm.price">
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Kallorien</mat-label>
+        <input type="number" matInput [formField]="itemForm.calories">
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+        <mat-label>Zubereitungszeit</mat-label>
+        <input type="number" matInput [formField]="itemForm.preparationTime">
+    </mat-form-field>
+</div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Abbrechen</button>
+  <button mat-flat-button (click)="save()" [disabled]="itemForm().invalid()">Speichern</button>
+</mat-dialog-actions>

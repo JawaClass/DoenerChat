@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { OrderSelectionService } from '../order-selection-service';
 import { BasketItemDisplay } from "../basket-item-display/basket-item-display";
 import { BackItemGroupDisplay } from "../back-item-group-display/back-item-group-display";
+import { MatAnchor } from "@angular/material/button";
 
 @Component({
   selector: 'app-customer-order-summary',
-  imports: [BasketItemDisplay, BackItemGroupDisplay],
+  imports: [BasketItemDisplay, BackItemGroupDisplay, MatAnchor],
   templateUrl: './customer-order-summary.html',
   styleUrl: './customer-order-summary.css',
 })

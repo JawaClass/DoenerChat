@@ -4,6 +4,7 @@ import { BasketMenuItem, OrderSelectionService } from '../order-selection-servic
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { EditModeService } from '../edit-mode-service';
 @Component({
   selector: 'app-basket-item-display',
   imports: [LucideFileText, MatCheckboxModule, CommonModule, MatButtonModule, LucideDelete, LucideTrash],
@@ -14,6 +15,9 @@ export class BasketItemDisplay {
   readonly item = input.required<BasketMenuItem>()
 
   private readonly service = inject(OrderSelectionService)
+  private readonly editModeService = inject(EditModeService)
+
+  readonly editingAllowed = this.editModeService.isEditingAllowed
 
   delete() {
     this.service.removeItem(this.item())

@@ -1,6 +1,18 @@
 @let items_ = items();
-
 <div class="w-full h-full flex gap-2">
     <app-customer-order-summary class="flex-1 w-full"></app-customer-order-summary>
-    <app-menu-board class="m-[20px] w-full flex-4" [menuItems]="items_"></app-menu-board>
+    <div class="flex-4 flex flex-col">
+        <app-top-bar class="w-full h-22 bg-amber-300"></app-top-bar>
+
+        <div class="w-full overflow-auto flex-1 flex-col">
+
+            <app-menu-board (itemSelected)="itemSelected($event)" class="w-full h-full" [menuItems]="items_.items"></app-menu-board> 
+
+            @if (items_.mode === "CATEGORY") {
+
+                <app-menu-board (itemSelected)="itemSelected($event)" class="w-full flex-1" [menuItems]="items_.items"></app-menu-board> 
+            }
+            <router-outlet />
+        </div>
+    </div>
 </div>

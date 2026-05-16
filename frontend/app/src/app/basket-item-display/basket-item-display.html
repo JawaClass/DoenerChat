@@ -11,11 +11,13 @@
 
     <div class="text-gray-800">{{item_.item.price}}</div>
 
-    <button matFab aria-label="Example icon button with a delete icon">
-        <svg lucideFileText></svg>
-    </button>
+    @if (editingAllowed()) {
+        <button matIconButton aria-label="Example icon button with a delete icon">
+            <svg lucideFileText></svg>
+        </button>
+    }
 
-    <button matFab (click)="delete()">
+    <button matIconButton (click)="delete()">
         <svg lucideTrash></svg>
     </button>
 
