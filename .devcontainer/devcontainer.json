@@ -12,7 +12,7 @@
       "version": "22"
     }
   },
-  "postCreateCommand": "npm install -g @angular/cli",
+  "postCreateCommand": "npm install -g @angular/cli && curl -LsSf https://astral.sh/uv/install.sh | sh",
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // This can be used to network with other containers or with the host.
@@ -21,7 +21,7 @@
   // add prettier code formatting to devcontainer vs code env
   "customizations": {
     "vscode": {
-      "extensions": ["esbenp.prettier-vscode"],
+      "extensions": ["esbenp.prettier-vscode", "ms-python.python"],
       "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
