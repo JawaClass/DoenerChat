@@ -1,24 +1,30 @@
 @let basket_ = basket;
 
 <div class="flex flex-col justify-between h-full bg-blue-300">
-    <div>Anzahl: {{basket_.items().length}}</div>
+  <div>Anzahl: {{ basket_.items().length }}</div>
 
-    <div class="flex flex-col gap-1 flex-1 overflow-auto">
-        @for (item of basket_.items(); track $index) {
-                <!-- <app-basket-item-display [item]="item"></app-basket-item-display> -->
-            <app-back-item-group-display [item]="item"></app-back-item-group-display>
-        
-            }
+  <div class="flex flex-col gap-1 flex-1 overflow-auto">
+    @for (item of basket_.items(); track $index) {
+      <!-- <app-basket-item-display [item]="item"></app-basket-item-display> -->
+      <app-back-item-group-display [item]="item"></app-back-item-group-display>
+    }
+  </div>
+
+  <div class="flex flex-col">
+    <div class="flex flex-col gap-2 bg-green-300">
+      <div>Total Prep Time: {{ basket_.totalPrepTime() }}</div>
+      <div>Total Price: {{ basket_.totalPrice() }}</div>
     </div>
 
-    <div class="flex flex-col">
-        <div class="flex flex-col gap-2 bg-green-300">
-            <div>Total Prep Time: {{basket_.totalPrepTime()}}</div>
-            <div>Total Price: {{basket_.totalPrice()}}</div>
-        </div>
-
-        <div>
-            <button mat-button class="w-full h-full border-r-0! h-16!" (click)="makeOrder()" [disabled]="btnDisabled()">Bestellen</button>
-        </div>
+    <div>
+      <button
+        mat-button
+        class="w-full h-full border-r-0! h-16!"
+        (click)="makeOrder()"
+        [disabled]="btnDisabled()"
+      >
+        Bestellen
+      </button>
     </div>
+  </div>
 </div>
