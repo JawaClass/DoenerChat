@@ -58,8 +58,16 @@ export class OrderSelectionService {
   readonly totalPrepTime = computed(() => this.activeItems().reduce((acc, item) => acc + item.item.preparationTime, 0))
 
   readonly grouped = computed(() => {
-
     const items = this.selected()
+    return this.groupItemsIntoGroups(items)
+  })
+
+
+
+  readonly itemsActive = computed(() => this.basket().filter(item => item.active))
+
+
+  groupItemsIntoGroups(items: BasketMenuItem[]) {
 
     const groupedItems = new Map<number, BasketMenuItemGroup>()
 
@@ -70,10 +78,8 @@ export class OrderSelectionService {
       groupedItems.set(key, { name: item.item.name, items: [...acc, item] })
     }
     return [...groupedItems.values()]
-  })
 
-
-
+  }
 
 
 }

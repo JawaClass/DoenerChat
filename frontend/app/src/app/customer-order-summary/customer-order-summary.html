@@ -18,7 +18,7 @@
         </div>
 
         <div>
-            <button mat-button class="w-full h-full border-r-0! h-16!" >Bestellen</button>
+            <button mat-button class="w-full h-full border-r-0! h-16!" (click)="makeOrder()" [disabled]="btnDisabled()">Bestellen</button>
         </div>
     </div>
 </div>
