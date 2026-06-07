@@ -1,17 +1,16 @@
 package com.doener.doener.features.user.registration;
 
-import javax.naming.OperationNotSupportedException;
-
 import org.springframework.stereotype.Service;
 
+import com.doener.doener.features.user.User;
 import com.doener.doener.features.user.UserService;
+import com.doener.doener.features.user.User.Role;
+import com.doener.doener.features.user.password.InvalidPasswordError;
+import com.doener.doener.features.user.password.UserPasswordHandler;
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserLocalRegistrationRequest;
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest;
-import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest.Provider;
-import com.doener.doener.features.user.registration.PasswordValidator.PasswordDeniedResult;
-import com.doener.doener.features.user.registration.User.Role;
+import com.doener.doener.features.user.social.UserSocialProvider;
 import com.doener.doener.shared.error.NotImplementedError;
-
 import lombok.AllArgsConstructor;
 
 @Service
@@ -22,7 +21,7 @@ public class UserRegistrationService {
     private final UserPasswordHandler userPasswordHandler;
     private final UserService userService;
 
-    public void registerUser(IUserRegistrationRequest request) {
+    public User registerUser(IUserRegistrationRequest request) {
 
         if (request instanceof UserLocalRegistrationRequest localRequest) {
 
@@ -34,11 +33,14 @@ public class UserRegistrationService {
             User user = User.builder().name(localRequest.getName()).email(localRequest.getEmail()).role(Role.USER)
                     .build();
 
-            userService.createLocalUserWithPassword(user, localRequest.getPassword());
+            return userService.createLocalUserWithPassword(user, localRequest.getPassword());
 
         } else if (request instanceof UserSocialRegistrationRequest socialRequest) {
 
-            if (socialRequest.getProvider() == Provider.Google) {
+            User user = User.builder().email(socialRequest.getEmail()).role(Role.USER)
+                    .build();
+
+            if (socialRequest.getProvider() == UserSocialProvider.Google) {
 
             }
 
@@ -46,6 +48,8 @@ public class UserRegistrationService {
         }
 
         // TODO: register continues
+
+        return null;
 
     }
 }

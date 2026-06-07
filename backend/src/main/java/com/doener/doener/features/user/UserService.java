@@ -9,6 +9,10 @@ import com.doener.doener.features.user.registration.User;
 import com.doener.doener.features.user.registration.User.Role;
 import com.doener.doener.features.user.registration.UserPassword;
 import com.doener.doener.features.user.registration.UserPasswordHandler;
+import com.doener.doener.features.user.registration.UserSocialAccount;
+import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest;
+import com.doener.doener.features.user.registration.SocialProviderConflictError;
+import com.doener.doener.features.user.social.UserSocialAccountRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -22,22 +26,13 @@ public class UserService {
     private final UserRepository userRepo;
     private final UserPasswordHandler userPasswordHandler;
     private final UserPasswordService userPasswordService;
+    private final UserSocialAccountRepository userSocialAccountRepository;
 
-    public User createUser(String name) {
-        var user = new User();
-        user.setRole(Role.USER);
-        user.setName(name);
-        logger.info("Creating merchant with name: {}", name);
-        return userRepo.save(user);
-    }
-
-    public Iterable<User> getAllMerchants() {
-        logger.info("Fetching all merchants");
+    public Iterable<User> getAllUsers() {
         return userRepo.findAll();
     }
 
-    public User getMerchantById(Long id) {
-        logger.info("Fetching merchant with ID: {}", id);
+    public User getUserById(Long id) {
         return userRepo.findById(id).orElse(null);
     }
 
@@ -53,4 +48,34 @@ public class UserService {
         userPasswordService.save(userPassword);
         return savedUser;
     }
+
+    public User createSocialUser(User user, UserSocialRegistrationRequest social) {
+
+        var savedUser = save(user);
+
+        addSocial(savedUser, social);
+
+        return savedUser;
+    }
+
+    public UserSocialAccount addSocial(User user, UserSocialRegistrationRequest social) {
+
+        var existingProvider = user.getUserSocialAccounts().stream()
+                .filter(u -> u.getProvider() == social.getProvider()).findAny();
+
+        if (existingProvider.isPresent()) {
+            throw new SocialProviderConflictError(
+                    "Provider %s already exists for this account. UserId: %s".formatted(social.getProvider(),
+                            user.getId()));
+        }
+
+        UserSocialAccount socialAcount = UserSocialAccount.builder().provider(social.getProvider())
+                .providerEmail(social.getEmail()).user(user).build();
+
+        var savedSocial = userSocialAccountRepository.save(socialAcount);
+
+        return savedSocial;
+
+    }
+
 }

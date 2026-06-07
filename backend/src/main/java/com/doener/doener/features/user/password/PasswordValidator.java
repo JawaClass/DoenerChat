@@ -1,4 +1,4 @@
-package com.doener.doener.features.user.registration;
+package com.doener.doener.features.user.password;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Component
-class PasswordValidator {
+public class PasswordValidator {
 
     enum PasswordDeniedCode {
         IS_NULL, TOO_SHORT, TOO_LONG, UPPERCASE_MISSING, NUMBER_MISSING, SPECIAL_CHAR_MISSING
