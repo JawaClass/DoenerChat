@@ -1,6 +1,7 @@
-package com.doener.doener.features.user;
+package com.doener.doener.features.user.address;
 
 import com.doener.doener.features.address.Address;
+import com.doener.doener.features.user.User;
 import com.doener.doener.shared.models.TableDefaultEntity;
 
 import jakarta.persistence.EmbeddedId;
@@ -30,13 +31,4 @@ public class UserAddress extends TableDefaultEntity {
 
     private Integer ordering;
 
-    @PrePersist
-    void onSave() {
-        var currentAdresses = user.getAddresses();
-
-        if (ordering == null) {
-            var maxOrdering = currentAdresses.stream().map(a -> a.getOrdering()).max(Integer::compareTo).orElse(-1);
-            ordering = maxOrdering + 1;
-        }
-    }
 }
