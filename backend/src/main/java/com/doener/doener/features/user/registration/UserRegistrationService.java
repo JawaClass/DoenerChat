@@ -7,6 +7,8 @@ import com.doener.doener.features.user.UserService;
 import com.doener.doener.features.user.User.Role;
 import com.doener.doener.features.user.password.InvalidPasswordError;
 import com.doener.doener.features.user.password.UserPasswordHandler;
+import com.doener.doener.features.user.password.PasswordValidator;
+import com.doener.doener.features.user.password.PasswordValidator.PasswordDeniedResult;
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserLocalRegistrationRequest;
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest;
 import com.doener.doener.features.user.social.UserSocialProvider;

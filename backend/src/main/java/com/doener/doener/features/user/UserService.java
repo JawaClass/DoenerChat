@@ -5,13 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.doener.doener.features.user.registration.User;
-import com.doener.doener.features.user.registration.User.Role;
-import com.doener.doener.features.user.registration.UserPassword;
-import com.doener.doener.features.user.registration.UserPasswordHandler;
-import com.doener.doener.features.user.registration.UserSocialAccount;
+import com.doener.doener.features.address.Address;
+import com.doener.doener.features.user.address.UserAddress;
+import com.doener.doener.features.user.address.UserAddressRepository;
+import com.doener.doener.features.user.password.UserPassword;
+import com.doener.doener.features.user.password.UserPasswordHandler;
+import com.doener.doener.features.user.password.UserPasswordService;
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest;
-import com.doener.doener.features.user.registration.SocialProviderConflictError;
+import com.doener.doener.features.user.social.SocialProviderConflictError;
+import com.doener.doener.features.user.social.UserSocialAccount;
 import com.doener.doener.features.user.social.UserSocialAccountRepository;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ public class UserService {
     private final UserPasswordHandler userPasswordHandler;
     private final UserPasswordService userPasswordService;
     private final UserSocialAccountRepository userSocialAccountRepository;
+    private final UserAddressRepository userAddressRepository;
 
     public Iterable<User> getAllUsers() {
         return userRepo.findAll();
@@ -76,6 +79,21 @@ public class UserService {
 
         return savedSocial;
 
+    }
+
+    public UserAddress addAddress(User user, Address address) {
+
+        logger.info("For user {} add address: {}", user.getEmail(), address);
+
+        var maxOrdering = userAddressRepository.findMaxOrderingByUser(user).orElse(-1);
+
+        UserAddress userAddress = UserAddress.builder()
+                .user(user)
+                .address(address)
+                .ordering(maxOrdering + 1)
+                .build();
+
+        return userAddressRepository.save(userAddress);
     }
 
 }

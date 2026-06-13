@@ -17,7 +17,7 @@ public class PasswordValidator {
 
     @Data
     @AllArgsConstructor
-    class PasswordDeniedReason {
+    public class PasswordDeniedReason {
         private final PasswordDeniedCode reasonCode;
         private final String message;
     }
@@ -40,7 +40,7 @@ public class PasswordValidator {
 
     @Data
     @AllArgsConstructor
-    class PasswordDeniedResult implements IPasswordAllowed {
+    public class PasswordDeniedResult implements IPasswordAllowed {
 
         List<PasswordDeniedReason> reasons;
 

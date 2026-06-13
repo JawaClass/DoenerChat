@@ -1,5 +1,6 @@
-package com.doener.doener.features.user.registration;
+package com.doener.doener.features.user.social;
 
+import com.doener.doener.features.user.User;
 import com.doener.doener.shared.models.TableDefaultEntity;
 
 import jakarta.persistence.Column;
@@ -21,15 +22,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor // Constructor with all fields
 @Builder // Optional: allows Merchant.builder().name("foo").build()
 public class UserSocialAccount extends TableDefaultEntity {
-    public enum AuthProvider {
-        LOCAL, GOOGLE, GITHUB
-    }
 
     @ManyToOne
     private User user;
 
     @Enumerated(EnumType.STRING)
-    private AuthProvider provider;
+    private UserSocialProvider provider;
 
     @Column(nullable = false)
     private String providerUserId;

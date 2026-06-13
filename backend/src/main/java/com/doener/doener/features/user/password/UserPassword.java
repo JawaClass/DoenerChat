@@ -1,5 +1,6 @@
-package com.doener.doener.features.user.registration;
+package com.doener.doener.features.user.password;
 
+import com.doener.doener.features.user.User;
 import com.doener.doener.shared.models.TableDefaultEntity;
 
 import jakarta.persistence.Column;

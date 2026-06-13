@@ -1,6 +1,5 @@
-package com.doener.doener.features.user.registration;
+package com.doener.doener.features.user.social;
 
-import com.doener.doener.features.user.registration.PasswordValidator.PasswordDeniedResult;
 import com.doener.doener.shared.error.DoenerException;
 
 import lombok.Getter;

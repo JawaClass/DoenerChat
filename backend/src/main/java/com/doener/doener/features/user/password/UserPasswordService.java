@@ -1,9 +1,7 @@
-package com.doener.doener.features.user;
+package com.doener.doener.features.user.password;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
-
-import com.doener.doener.features.user.registration.UserPassword;
 
 import lombok.AllArgsConstructor;
 

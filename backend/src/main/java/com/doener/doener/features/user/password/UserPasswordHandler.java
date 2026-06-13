@@ -1,7 +1,9 @@
-package com.doener.doener.features.user.registration;
+package com.doener.doener.features.user.password;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.doener.doener.features.user.User;
 
 import lombok.AllArgsConstructor;
 

@@ -1,6 +1,7 @@
 package com.doener.doener.shared.models;
- 
+
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -21,21 +22,36 @@ import lombok.experimental.SuperBuilder;
 @Setter
 public abstract class TableDefaultEntity {
 
+    /**
+     * internal unique identifier
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "create_date", nullable = false, updatable = false) 
-    private LocalDateTime createDate = LocalDateTime.now();
+    /**
+     * external unique identifier
+     */
+    @Column(nullable = false, unique = true, updatable = false)
+    private UUID uuid;
+
+    @Column(name = "create_date", nullable = false, updatable = false)
+    private LocalDateTime createDate;
 
     @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
- 
     @PrePersist
     protected void onCreate() {
-        this.createDate = LocalDateTime.now();
-        this.lastUpdated = this.createDate; 
+        var now = LocalDateTime.now();
+
+        createDate = now;
+        lastUpdated = now;
+
+        if (uuid == null) {
+            uuid = UUID.randomUUID();
+        }
+
     }
 
     @PreUpdate

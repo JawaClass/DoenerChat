@@ -2,6 +2,7 @@ package com.doener.doener.features.user.registration;
 
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserLocalRegistrationRequest;
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest;
+import com.doener.doener.features.user.social.UserSocialProvider;
 
 import lombok.Builder;
 import lombok.Data;
@@ -21,11 +22,7 @@ public sealed interface IUserRegistrationRequest permits UserLocalRegistrationRe
     @Builder
     final class UserSocialRegistrationRequest implements IUserRegistrationRequest {
 
-        enum Provider {
-            Google, Facebook, Apple
-        }
-
         private final String email;
-        private final Provider provider;
+        private final UserSocialProvider provider;
     }
 }
