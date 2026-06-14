@@ -25,6 +25,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -68,9 +69,12 @@ public class User extends TableDefaultEntity implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
+    @Transient // not persisted, just held in memory for Spring Security
+    private String _password;
+
     @Override
     public @Nullable String getPassword() {
-        return null;
+        return _password;
     }
 
     @Override

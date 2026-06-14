@@ -11,7 +11,7 @@ public sealed interface IUserRegistrationRequest permits UserLocalRegistrationRe
 
     @Data
     @Builder
-    final class UserLocalRegistrationRequest implements IUserRegistrationRequest {
+    public static final class UserLocalRegistrationRequest implements IUserRegistrationRequest {
 
         private final String email;
         private final String name;
@@ -20,7 +20,7 @@ public sealed interface IUserRegistrationRequest permits UserLocalRegistrationRe
 
     @Data
     @Builder
-    final class UserSocialRegistrationRequest implements IUserRegistrationRequest {
+    public static final class UserSocialRegistrationRequest implements IUserRegistrationRequest {
 
         private final String email;
         private final UserSocialProvider provider;

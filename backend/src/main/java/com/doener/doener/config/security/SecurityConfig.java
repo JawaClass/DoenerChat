@@ -9,6 +9,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.doener.doener.features.user.UserDetailsServiceImpl;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -21,9 +22,29 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
+				.formLogin(form -> form
+						/**
+						 * 
+						 * On failed login return HTTP CODE 301
+						 * 
+						 */
+						.failureHandler((request, response, exception) -> {
+							response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						})
+
+						/**
+						 * 
+						 * On succesful login return HTTP CODE 200
+						 * 
+						 */
+						.successHandler((request, response, authentication) -> {
+							response.setStatus(HttpServletResponse.SC_OK);
+						}))
+
+				.csrf(x -> x.disable())
 				.userDetailsService(userDetailsServiceImpl)
 				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers("/api/public/**", "/login", "/register", "/").permitAll()
+						.requestMatchers("/login", "/register", "/").permitAll()
 						.anyRequest().authenticated());
 
 		return http.build();

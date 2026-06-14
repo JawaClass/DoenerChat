@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 import com.doener.doener.features.meal.MainMeal;
 import com.doener.doener.features.meal.MainMealRepository;
 import com.doener.doener.features.meal.MealExtra;
-import com.doener.doener.shared.models.Currency;
+import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserLocalRegistrationRequest;
+import com.doener.doener.features.user.registration.UserRegistrationService;
 import com.doener.doener.shared.models.MealType;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +22,8 @@ import lombok.AllArgsConstructor;
 public class DummyDataLoader implements CommandLineRunner {
 
     private final MainMealRepository mainMealRepo;
+
+    private final UserRegistrationService userRegistrationService;
 
     private static final Logger logger = LoggerFactory.getLogger(DummyDataLoader.class);
 
@@ -55,6 +58,9 @@ public class DummyDataLoader implements CommandLineRunner {
             m.addExtra(extras);
             mainMealRepo.save(m);
         }
+
+        userRegistrationService.registerUser(UserLocalRegistrationRequest.builder().email("test@gmail.com")
+                .name("testuser").password("1234aabJJD33837//___ä##").build());
 
         logger.info("Dummy Data loaded!");
     }
