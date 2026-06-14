@@ -11,21 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
- 
-@RequiredArgsConstructor 
+
+@RequiredArgsConstructor
 public abstract class BaseCrudController<TD> {
 
     private final BaseCrudService<TD, Long> service;
- 
+
     @GetMapping("/{id}")
     public TD getById(@PathVariable Long id) {
         return service.getById(id).orElseThrow(
-        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found with ID: " + id)
-    ); 
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found with ID: " + id));
     }
 
     @GetMapping
     public Iterable<TD> getAll() {
-        return service.getAll();    
+        return service.getAll();
     }
 }

@@ -1,5 +1,5 @@
 package com.doener.doener.shared.http;
- 
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.doener.doener.features.merchant.MerchantService;
-
 import java.io.IOException;
 
 @Component
@@ -22,11 +20,11 @@ public class HttpResponseFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
+            HttpServletResponse response,
+            FilterChain filterChain)
             throws ServletException, IOException {
 
-        logger.info("Filtering response for request: {}", request.getRequestURI()); 
+        logger.info("Filtering response for request: {}", request.getRequestURI());
 
         // Add a custom header
         response.addHeader("X-Custom-Header", "MyHeaderValue");

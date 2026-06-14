@@ -1,0 +1,9 @@
+package com.doener.doener.features.media;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MediaRepository extends JpaRepository<Media, Long> {
+
+    public void testXXX();
+
+}

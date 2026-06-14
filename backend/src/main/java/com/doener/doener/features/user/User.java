@@ -1,8 +1,15 @@
 package com.doener.doener.features.user;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.doener.doener.features.organization.Organization;
 import com.doener.doener.features.user.address.UserAddress;
 import com.doener.doener.features.user.social.UserSocialAccount;
 import com.doener.doener.shared.models.TableDefaultEntity;
@@ -15,6 +22,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -24,11 +32,11 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
-@Data // Generates getters, setters, toString, equals, hashCode
-@NoArgsConstructor // Default constructor required by JPA
-@AllArgsConstructor // Constructor with all fields
-@Builder // Optional: allows Merchant.builder().name("foo").build()
-public class User extends TableDefaultEntity {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User extends TableDefaultEntity implements UserDetails {
 
     public enum Role {
         USER, MERCHANT, ADMIN
@@ -44,12 +52,30 @@ public class User extends TableDefaultEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @ManyToOne
+    private Organization organization;
+
     @OneToMany
     private List<UserSocialAccount> userSocialAccounts;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "user_address", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
+    @OneToMany
     @Builder.Default
     private List<UserAddress> addresses = new ArrayList<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // return List.of();
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+    }
+
+    @Override
+    public @Nullable String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
 
 }

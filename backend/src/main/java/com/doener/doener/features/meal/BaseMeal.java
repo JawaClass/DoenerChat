@@ -15,7 +15,7 @@ import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder; 
+import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 @SuperBuilder
@@ -40,14 +40,11 @@ public abstract class BaseMeal extends TableDefaultEntity {
     @Column(nullable = false)
     private Currency currency = Currency.EUR;
 
-    @Enumerated(EnumType.STRING) // Store as VARCHAR in DB
-    @Column(nullable = false)
-    private MealType type;
-
     @PrePersist
     protected void onCreate() {
         System.out.println("PrePersist called in BaseMeal");
-        if (this.currency == null) this.currency = Currency.EUR;   
+        if (this.currency == null)
+            this.currency = Currency.EUR;
         super.onCreate();
     }
 }

@@ -4,11 +4,14 @@ import java.time.Instant;
 
 import org.springframework.http.MediaType;
 
+import com.doener.doener.features.organization.Organization;
 import com.doener.doener.shared.models.TableDefaultEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +23,11 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class Media extends TableDefaultEntity {
+
+    public static enum MediaType {
+        IMAGE,
+        VIDEO,
+    }
 
     private String storageKey;
 
@@ -38,4 +46,8 @@ public class Media extends TableDefaultEntity {
     private Integer durationSeconds;
 
     private Instant uploadedAt;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(nullable = false)
+    private Organization organization;
 }

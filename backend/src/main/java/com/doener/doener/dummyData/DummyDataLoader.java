@@ -11,9 +11,6 @@ import org.springframework.stereotype.Component;
 import com.doener.doener.features.meal.MainMeal;
 import com.doener.doener.features.meal.MainMealRepository;
 import com.doener.doener.features.meal.MealExtra;
-import com.doener.doener.features.merchant.Merchant;
-import com.doener.doener.features.merchant.MerchantRepository;
-import com.doener.doener.features.merchant.MerchantService;
 import com.doener.doener.shared.models.Currency;
 import com.doener.doener.shared.models.MealType;
 
@@ -23,7 +20,6 @@ import lombok.AllArgsConstructor;
 @Component
 public class DummyDataLoader implements CommandLineRunner {
 
-    private final MerchantRepository merchantRepo;
     private final MainMealRepository mainMealRepo;
 
     private static final Logger logger = LoggerFactory.getLogger(DummyDataLoader.class);
@@ -31,7 +27,6 @@ public class DummyDataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Clear existing data if you want
-        merchantRepo.deleteAll();
         mainMealRepo.deleteAll();
 
         // // Add 100 dummy merchants

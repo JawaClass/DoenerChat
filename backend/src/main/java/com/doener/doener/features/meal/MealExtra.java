@@ -1,8 +1,12 @@
 package com.doener.doener.features.meal;
 
+import com.doener.doener.shared.models.MealType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -15,6 +19,10 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor // Default constructor required by JPA
 @SuperBuilder
 public class MealExtra extends BaseMeal {
+
+    @Enumerated(EnumType.STRING) // Store as VARCHAR in DB
+    @Column(nullable = false)
+    private MealType type;
 
     @JsonBackReference
     @ManyToOne

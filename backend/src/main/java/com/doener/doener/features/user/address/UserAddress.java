@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -26,7 +27,7 @@ public class UserAddress extends TableDefaultEntity {
     @ManyToOne
     private User user;
 
-    @ManyToOne
+    @OneToOne
     private Address address;
 
     private Integer ordering;
