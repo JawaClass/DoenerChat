@@ -34,13 +34,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         var userPassword = userPasswordRepository.findByUser_Id(user.getId());
 
-        userPassword.ifPresent(pw -> user.set_password(pw.getPasswordHashed()));
-
         if (userPassword.isEmpty()) {
             throw new UsernameNotFoundException(
                     "No password found for user: %s. Or if this is oAuth social login eg Google, change this error throwns here..."
                             .formatted(username));
         }
+
+        userPassword.ifPresent(pw -> user.set_password(pw.getPasswordHashed()));
 
         return user;
     }

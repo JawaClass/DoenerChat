@@ -1,0 +1,57 @@
+<hlm-dialog>
+  <button hlmDialogTrigger hlmBtn variant="outline">Login</button>
+  <hlm-dialog-content *hlmDialogPortal="let ctx" class="sm:max-w-sm color-errors">
+    <hlm-dialog-header>
+      <h3 hlmDialogTitle>Melde dich an</h3>
+      <p hlmDialogDescription>Noch keinen Account? Hier registrieren.</p>
+    </hlm-dialog-header>
+    <hlm-field-group>
+      <hlm-field>
+        <label hlmFieldLabel for="email">Email</label>
+        <input hlmInput id="email" [formField]="loginForm.email" />
+
+        <hlm-field-error [forceShow]="loginForm.email().invalid() && loginForm.email().touched()">
+          @for (error of loginForm.email().errors(); track error.kind) {
+            <span>{{ error.message }}</span>
+          }
+        </hlm-field-error>
+      </hlm-field>
+      <hlm-field>
+        <label hlmFieldLabel for="password">Passwort</label>
+        <hlm-input-group>
+          <input
+            hlmInputGroupInput
+            [type]="showPassword() ? null : 'password'"
+            id="password"
+            [formField]="loginForm.password"
+          />
+          <hlm-input-group-addon align="inline-end">
+            <button
+              hlmBtn
+              size="icon"
+              variant="outline"
+              (click)="toggleShowPassword()"
+              class="border-none h-fit"
+            >
+              <ng-icon [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'" />
+            </button>
+          </hlm-input-group-addon>
+        </hlm-input-group>
+
+        <hlm-field-error
+          [forceShow]="loginForm.password().invalid() && loginForm.password().touched()"
+        >
+          @for (error of loginForm.password().errors(); track error.kind) {
+            <span>{{ error.message }}</span>
+          }
+        </hlm-field-error>
+      </hlm-field>
+    </hlm-field-group>
+    <hlm-dialog-footer>
+      <button hlmBtn variant="outline" hlmDialogClose>Cancel</button>
+      <button hlmBtn type="submit" (click)="login()" [disabled]="!loginForm().valid()">
+        Login
+      </button>
+    </hlm-dialog-footer>
+  </hlm-dialog-content>
+</hlm-dialog>
