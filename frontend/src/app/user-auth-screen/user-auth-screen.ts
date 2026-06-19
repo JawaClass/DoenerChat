@@ -19,12 +19,9 @@ export class UserAuthScreen {
   private readonly userAuthService = inject(UserAuthService)
 
   readonly authScreen = this.userAuthService.authScreen
-  // private readonly _dialogContext = injectBrnDialogContext<{ screen: AuthScreen }>();
 
-
-  // constructor() {
-  //   console.log("UserAuthScreen. Screen=", this._dialogContext.screen)
-  // }
-
+  constructor() {
+    this.userAuthService.setDialogRef(this._dialogRef)
+  }
 
 }

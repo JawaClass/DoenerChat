@@ -20,6 +20,7 @@ import { HlmDialogService } from '@spartan-ng/helm/dialog';
 import { UserAuthScreen } from '../user-auth-screen/user-auth-screen';
 import { AuthScreen, UserAuthService } from '../user-auth-screen/user-auth-service';
 import { MealService } from '../meal-service';
+import { LoginService } from '../user-auth-screen/login/login-service';
 @Component({
   selector: 'app-top-bar',
   imports: [
@@ -35,6 +36,9 @@ import { MealService } from '../meal-service';
   styleUrl: './top-bar.css',
 })
 export class TopBar {
+  logout() {
+    this.loginService.logout().subscribe();
+  }
   private readonly editModeService = inject(EditModeService);
   private readonly menuItemService = inject(MenuItemsService);
 
@@ -45,6 +49,11 @@ export class TopBar {
   private readonly _hlmDialogService = inject(HlmDialogService);
 
   private readonly authService = inject(UserAuthService);
+  private readonly loginService = inject(LoginService);
+
+  readonly loggedInUser = this.loginService.loggedInUser;
+
+  readonly isLoggedIn = this.loginService.isLoggedIn;
 
   fetchMeals() {
     this.mealsService.getMeals().subscribe((meals) => {

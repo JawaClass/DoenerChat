@@ -28,12 +28,12 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http
-			.cors(Customizer.withDefaults())
-			.csrf(x -> x.disable())
-			.userDetailsService(userDetailsServiceImpl)
-			.authorizeHttpRequests(authorize -> authorize
-					.requestMatchers("/", "/api/auth/login", "/api/auth/register").permitAll()
-					.anyRequest().authenticated());
+				.cors(Customizer.withDefaults())
+				.csrf(x -> x.disable())
+				.userDetailsService(userDetailsServiceImpl)
+				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers("/", "/api/auth/login", "/api/auth/register", "/api/auth/status").permitAll()
+						.anyRequest().authenticated());
 
 		return http.build();
 	}
@@ -56,21 +56,21 @@ public class SecurityConfig {
 	}
 }
 
-				// .formLogin(form -> form
-				// 		/**
-				// 		 * 
-				// 		 * On failed login return HTTP CODE 301
-				// 		 * 
-				// 		 */
-				// 		.failureHandler((request, response, exception) -> {
-				// 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				// 		})
+// .formLogin(form -> form
+// /**
+// *
+// * On failed login return HTTP CODE 301
+// *
+// */
+// .failureHandler((request, response, exception) -> {
+// response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+// })
 
-				// 		/**
-				// 		 * 
-				// 		 * On succesful login return HTTP CODE 200
-				// 		 * 
-				// 		 */
-				// 		.successHandler((request, response, authentication) -> {
-				// 			response.setStatus(HttpServletResponse.SC_OK);
-				// 		}))
+// /**
+// *
+// * On succesful login return HTTP CODE 200
+// *
+// */
+// .successHandler((request, response, authentication) -> {
+// response.setStatus(HttpServletResponse.SC_OK);
+// }))

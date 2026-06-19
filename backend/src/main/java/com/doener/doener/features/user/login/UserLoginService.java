@@ -66,4 +66,21 @@ public class UserLoginService {
 
     }
 
+    public void logout(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
+        /**
+         * logout user
+         * cleaer auth context
+         * remove session from database
+         */
+        securityContextHolderStrategy.clearContext();
+
+        var session = request.getSession(false);
+
+        if (session != null) {
+
+            session.invalidate();
+        }
+
+    }
+
 }

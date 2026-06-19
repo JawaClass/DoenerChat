@@ -1,9 +1,13 @@
 package com.doener.doener.features.user.login;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +37,16 @@ public class UserLoginController {
         return authentication;
     }
 
+    @GetMapping("/status")
+    public Map<String, Object> authStatus(Authentication authentication) {
+        boolean loggedIn = authentication != null && authentication.isAuthenticated();
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("loggedIn", loggedIn);
+        result.put("user", loggedIn ? authentication.getName() : null);
+        return result;
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request,
             HttpServletResponse response) {
@@ -50,18 +64,10 @@ public class UserLoginController {
         return ResponseEntity.ok().build();
     }
 
-    // @PostMapping("/login")
-    // public void login() {
-
-    // var user = User.builder().build();
-
-    // }
-
-    // @PostMapping("/logout")
-    // public void logout() {
-
-    // var user = User.builder().build();
-
-    // }
+    @PostMapping("/logout")
+    public void logout(Authentication authentication, HttpServletRequest request,
+            HttpServletResponse response) {
+        userLoginService.logout(authentication, request, response);
+    }
 
 }

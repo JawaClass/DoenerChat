@@ -78,6 +78,7 @@ export class Login {
       },
       complete: () => {
         this.loginFailed.set(false);
+        this.authService.closeDialog();
       },
     });
   }

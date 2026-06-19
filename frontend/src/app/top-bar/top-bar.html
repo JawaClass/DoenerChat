@@ -22,8 +22,14 @@
 
   <!-- <app-login /> -->
 
-  <button hlmBtn variant="outline" (click)="openAuthDialog('Login')">Anmelden</button>
-  <button hlmBtn variant="outline" (click)="openAuthDialog('Register')">Registrieren</button>
+  @if (!isLoggedIn()) {
+    <button hlmBtn variant="outline" (click)="openAuthDialog('Login')">Anmelden</button>
+    <button hlmBtn variant="outline" (click)="openAuthDialog('Register')">Registrieren</button>
+  } @else {
+    <button hlmBtn variant="outline" (click)="logout()">Abmelden</button>
+
+    <div class="bg-amber-200 rounded-md border-4 text-lg h-fit">{{ loggedInUser() }}</div>
+  }
 
   <button hlmBtn variant="outline" (click)="fetchMeals()">fetch meals</button>
 </div>
