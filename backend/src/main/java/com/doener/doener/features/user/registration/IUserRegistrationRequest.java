@@ -4,25 +4,25 @@ import com.doener.doener.features.user.registration.IUserRegistrationRequest.Use
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest;
 import com.doener.doener.features.user.social.UserSocialProvider;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 
 public sealed interface IUserRegistrationRequest permits UserLocalRegistrationRequest, UserSocialRegistrationRequest {
 
-    @Data
     @Builder
-    public static final class UserLocalRegistrationRequest implements IUserRegistrationRequest {
+    public static record UserLocalRegistrationRequest(@NotBlank @Email String email, String name, @NotBlank String password) implements IUserRegistrationRequest {
 
-        private final String email;
-        private final String name;
-        private final String password;
+        // private final String email;
+        // private final String name;
+        // private final String password;
     }
-
-    @Data
+ 
     @Builder
-    public static final class UserSocialRegistrationRequest implements IUserRegistrationRequest {
+    public static record UserSocialRegistrationRequest(@NotBlank @Email  String email, UserSocialProvider provider) implements IUserRegistrationRequest {
 
-        private final String email;
-        private final UserSocialProvider provider;
+        // private final String email;
+        // private final UserSocialProvider provider;
     }
 }

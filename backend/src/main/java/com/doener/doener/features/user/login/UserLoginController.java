@@ -4,15 +4,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.doener.doener.features.user.login.UserLoginService.LoginRequest;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,33 +26,29 @@ public class UserLoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserLoginController.class);
 
-	private final AuthenticationManager authenticationManager;
+    private final UserLoginService userLoginService;
+
+    @GetMapping("/whoami")
+    public Object whoami(Authentication authentication) {
+        return authentication;
+    }
 
     @PostMapping("/login")
-        public ResponseEntity<Void> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request,
+            HttpServletResponse response) {
 
-            Authentication authenticationRequest =
-                UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.email(), loginRequest.password());
-            
-                try {
+        try {
 
-                    Authentication authenticationResponse =
-                        this.authenticationManager.authenticate(authenticationRequest);
+            var authResponse = userLoginService.login(loginRequest, request, response);
 
-                } catch (AuthenticationException exc) {
-                    
-                    logger.info("login failed for loginRequest: {}", loginRequest);
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (AuthenticationException exc) {
 
-                }
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
-            
-                return ResponseEntity.ok().build();
         }
 
-        public record LoginRequest(String email, String password) {
-        }
-
+        return ResponseEntity.ok().build();
+    }
 
     // @PostMapping("/login")
     // public void login() {

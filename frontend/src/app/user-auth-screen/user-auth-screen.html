@@ -1,0 +1,15 @@
+@let authScreen_ = authScreen();
+
+<!-- <p>user-auth-screen works! {{ authScreen_ }}</p> -->
+
+@if (authScreen_ == 'Login') {
+  <app-login />
+}
+
+@if (authScreen_ == 'ResetPassword') {
+  <app-reset-password />
+}
+
+@if (authScreen_ == 'Register') {
+  <app-register />
+}

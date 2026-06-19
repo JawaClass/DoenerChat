@@ -13,6 +13,8 @@ import com.doener.doener.features.user.registration.IUserRegistrationRequest.Use
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest;
 import com.doener.doener.features.user.social.UserSocialProvider;
 import com.doener.doener.shared.error.NotImplementedError;
+import com.doener.doener.shared.error.UserAlreadyExistsException;
+
 import lombok.AllArgsConstructor;
 
 @Service
@@ -27,22 +29,26 @@ public class UserRegistrationService {
 
         if (request instanceof UserLocalRegistrationRequest localRequest) {
 
-            var pwValidationResult = passwordValidator.validate(localRequest.getPassword());
+            if (userService.getUserByEmail(localRequest.email()).isPresent()) {
+                throw new UserAlreadyExistsException(localRequest.email());
+            }
+
+            var pwValidationResult = passwordValidator.validate(localRequest.password());
             if (pwValidationResult instanceof PasswordDeniedResult deniedResult) {
                 throw new InvalidPasswordError(deniedResult);
             }
 
-            User user = User.builder().name(localRequest.getName()).email(localRequest.getEmail()).role(Role.USER)
+            User user = User.builder().name(localRequest.name()).email(localRequest.email()).role(Role.USER)
                     .build();
 
-            return userService.createLocalUserWithPassword(user, localRequest.getPassword());
+            return userService.createLocalUserWithPassword(user, localRequest.password());
 
         } else if (request instanceof UserSocialRegistrationRequest socialRequest) {
 
-            User user = User.builder().email(socialRequest.getEmail()).role(Role.USER)
+            User user = User.builder().email(socialRequest.email()).role(Role.USER)
                     .build();
 
-            if (socialRequest.getProvider() == UserSocialProvider.Google) {
+            if (socialRequest.provider() == UserSocialProvider.Google) {
 
             }
 

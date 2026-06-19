@@ -15,6 +15,7 @@ import com.doener.doener.features.user.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -69,12 +70,12 @@ public abstract class TableDefaultEntity {
     private LocalDateTime lastUpdated;
 
     @CreatedBy
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id", nullable = true, updatable = false)
     private User createdBy;
 
     @LastModifiedBy
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_by_id", nullable = true, updatable = false)
     private User lastUpdatedBy;
 

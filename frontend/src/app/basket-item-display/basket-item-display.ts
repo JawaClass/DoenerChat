@@ -1,13 +1,13 @@
-import { Component, inject, input } from '@angular/core';
-import { LucideFileText, LucideDelete, LucideTrash } from '@lucide/angular';
-import { BasketMenuItem, OrderSelectionService } from '../shares/services/order-selection-service';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
+import { Component, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { LucideFileText, LucideTrash } from '@lucide/angular';
 import { EditModeService } from '../shares/services/edit-mode-service';
+import { BasketMenuItem, OrderSelectionService } from '../shares/services/order-selection-service';
 @Component({
   selector: 'app-basket-item-display',
-  imports: [LucideFileText, MatCheckboxModule, CommonModule, MatButtonModule, LucideDelete, LucideTrash],
+  imports: [LucideFileText, MatCheckboxModule, CommonModule, MatButtonModule, LucideTrash],
   templateUrl: './basket-item-display.html',
   styleUrl: './basket-item-display.css',
 })

@@ -1,5 +1,7 @@
 package com.doener.doener.features.user;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,10 @@ public class UserService {
         return userRepo.findAll();
     }
 
+    public Optional<User> getUserByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
+
     public User getUserById(Long id) {
         return userRepo.findById(id).orElse(null);
     }
@@ -64,16 +70,16 @@ public class UserService {
     public UserSocialAccount addSocial(User user, UserSocialRegistrationRequest social) {
 
         var existingProvider = user.getUserSocialAccounts().stream()
-                .filter(u -> u.getProvider() == social.getProvider()).findAny();
+                .filter(u -> u.getProvider() == social.provider()).findAny();
 
         if (existingProvider.isPresent()) {
             throw new SocialProviderConflictError(
-                    "Provider %s already exists for this account. UserId: %s".formatted(social.getProvider(),
+                    "Provider %s already exists for this account. UserId: %s".formatted(social.provider(),
                             user.getId()));
         }
 
-        UserSocialAccount socialAcount = UserSocialAccount.builder().provider(social.getProvider())
-                .providerEmail(social.getEmail()).user(user).build();
+        UserSocialAccount socialAcount = UserSocialAccount.builder().provider(social.provider())
+                .providerEmail(social.email()).user(user).build();
 
         var savedSocial = userSocialAccountRepository.save(socialAcount);
 

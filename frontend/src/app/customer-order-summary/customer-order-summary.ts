@@ -1,6 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { BasketMenuItem, BasketMenuItemGroup, OrderSelectionService } from '../shares/services/order-selection-service';
-import { BasketItemDisplay } from "../basket-item-display/basket-item-display";
+import { BasketMenuItemGroup, OrderSelectionService } from '../shares/services/order-selection-service';
 import { BackItemGroupDisplay } from "../back-item-group-display/back-item-group-display";
 import { MatAnchor } from "@angular/material/button";
 import { VoiceService } from '../shares/services/voice-service';
@@ -11,7 +10,7 @@ import { number2text } from '../shares/services/voice-translation';
 
 @Component({
   selector: 'app-customer-order-summary',
-  imports: [BasketItemDisplay, BackItemGroupDisplay, MatAnchor],
+  imports: [BackItemGroupDisplay, MatAnchor],
   templateUrl: './customer-order-summary.html',
   styleUrl: './customer-order-summary.css',
 })

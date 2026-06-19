@@ -38,8 +38,8 @@ class UserRegistrationTest {
 		var result = userRegistrationService.registerUser(userRegisterRequest);
 
 		assertTrue(result.getId() != null);
-		assertTrue(result.getEmail().equals(userRegisterRequest.getEmail()));
-		assertTrue(result.getName().equals(userRegisterRequest.getName()));
+		assertTrue(result.getEmail().equals(userRegisterRequest.email()));
+		assertTrue(result.getName().equals(userRegisterRequest.name()));
 		assertTrue(result.getUserSocialAccounts().isEmpty());
 
 	}

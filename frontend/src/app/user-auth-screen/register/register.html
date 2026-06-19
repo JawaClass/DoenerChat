@@ -1,0 +1,68 @@
+<hlm-dialog-header class="mb-4">
+  <h1 class="text-xl" hlmDialogTitle>Registrieren</h1>
+</hlm-dialog-header>
+<hlm-field-group class="color-errors">
+  <hlm-field>
+    <label hlmFieldLabel for="email">Email</label>
+    <input hlmInput id="email" [formField]="registerForm.email" />
+
+    <hlm-field-error [forceShow]="registerForm.email().invalid() && registerForm.email().touched()">
+      @for (error of registerForm.email().errors(); track error.kind) {
+        <span>{{ error.message }}</span>
+      }
+    </hlm-field-error>
+  </hlm-field>
+  <hlm-field>
+    <label hlmFieldLabel for="password">Passwort</label>
+    <hlm-input-group>
+      <input
+        hlmInputGroupInput
+        [type]="showPassword() ? null : 'password'"
+        id="password"
+        [formField]="registerForm.password"
+      />
+      <hlm-input-group-addon align="inline-end">
+        <button
+          hlmBtn
+          size="icon"
+          variant="outline"
+          (click)="toggleShowPassword()"
+          class="border-none h-fit"
+        >
+          <ng-icon [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'" />
+        </button>
+      </hlm-input-group-addon>
+    </hlm-input-group>
+
+    <hlm-field-error
+      [forceShow]="registerForm.password().invalid() && registerForm.password().touched()"
+    >
+      @for (error of registerForm.password().errors(); track error.kind) {
+        <span>{{ error.message }}</span>
+      }
+    </hlm-field-error>
+  </hlm-field>
+</hlm-field-group>
+
+@if (registrationFailed()) {
+  <hlm-alert variant="destructive">
+    <h4 hlmAlertTitle>Bitte Eingabe korrigieren</h4>
+  </hlm-alert>
+}
+
+<div class="mt-auto">
+  <div class="flex gap-2">
+    <span>Bereits registriert?</span>
+    <span
+      class="text-blue-500 hover:text-blue-400 hover:cursor-pointer hover:font-medium"
+      (click)="openLoginScreen()"
+      >Hier anmelden.</span
+    >
+  </div>
+
+  <hlm-dialog-footer class="flex items-center justify-between w-full">
+    <button hlmBtn type="submit" (click)="createAccount()" [disabled]="!registerForm().valid()">
+      Registrieren
+    </button>
+  </hlm-dialog-footer>
+</div>

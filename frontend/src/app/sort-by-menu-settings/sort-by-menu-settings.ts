@@ -1,12 +1,11 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckbox, MatCheckboxChange } from "@angular/material/checkbox";
 
-import { LucideArrowDownWideNarrow, LucideArrowDownAZ, LucideArrowUpAZ, LucideDynamicIcon, LucideIconBase, LucideArrowUp } from '@lucide/angular';
-import { MenuItemSortByParam, MenuItemsService } from '../shares/services/menu-items-service';
-import { MenuItem } from '../models';
 import { MatButtonModule } from "@angular/material/button";
+import { LucideArrowDownAZ, LucideArrowUpAZ, LucideDynamicIcon } from '@lucide/angular';
+import { MenuItem } from '../models';
+import { MenuItemsService } from '../shares/services/menu-items-service';
 interface SortByField {
   field: keyof MenuItem
   text: string
@@ -20,7 +19,7 @@ interface SortByFieldDisplay {
 }
 @Component({
   selector: 'app-sort-by-menu-settings',
-  imports: [MatCheckbox, ReactiveFormsModule, LucideArrowDownWideNarrow, LucideArrowDownAZ, LucideArrowUpAZ, LucideDynamicIcon, MatButtonModule],
+  imports: [MatCheckbox, ReactiveFormsModule, LucideDynamicIcon, MatButtonModule],
   templateUrl: './sort-by-menu-settings.html',
   styleUrl: './sort-by-menu-settings.css',
 })

@@ -46,7 +46,9 @@ public class User extends TableDefaultEntity implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    private Boolean emailConfirmed;
+
+    @Column(nullable = true)
     private String name;
 
     @Column(nullable = false)
@@ -57,7 +59,8 @@ public class User extends TableDefaultEntity implements UserDetails {
     private Organization organization;
 
     @OneToMany
-    private List<UserSocialAccount> userSocialAccounts;
+    @Builder.Default
+    private List<UserSocialAccount> userSocialAccounts = new ArrayList<>();
 
     @OneToMany
     @Builder.Default
