@@ -20,6 +20,7 @@
         hlmInputGroupInput
         [type]="showPassword() ? null : 'password'"
         id="password"
+        autocomplete="current-password"
         [formField]="loginForm.password"
       />
       <hlm-input-group-addon align="inline-end">
@@ -30,7 +31,7 @@
           (click)="toggleShowPassword()"
           class="border-none h-fit"
         >
-          <ng-icon [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'" />
+          <ng-icon [name]="showPassword() ? 'lucideEyeOff' : 'lucideEye'" />
         </button>
       </hlm-input-group-addon>
     </hlm-input-group>
@@ -41,17 +42,14 @@
       }
     </hlm-field-error>
   </hlm-field>
-
-
 </hlm-field-group>
 
 <div>
-
-    <span
-      class="text-blue-500 hover:text-blue-400 hover:cursor-pointer hover:font-medium"
-      (click)="openPasswordResetScreen()"
-      >Passwort vergessen?</span
-    >
+  <span
+    class="text-blue-500 hover:text-blue-400 hover:cursor-pointer hover:font-medium"
+    (click)="openPasswordResetScreen()"
+    >Passwort vergessen?</span
+  >
 </div>
 
 @if (loginFailed()) {

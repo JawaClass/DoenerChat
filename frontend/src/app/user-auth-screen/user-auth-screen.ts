@@ -4,11 +4,12 @@ import { BrnDialogRef, injectBrnDialogContext } from '@spartan-ng/brain/dialog';
 import { ResetPassword } from './reset-password/reset-password';
 import { Register } from './register/register';
 import { UserAuthService } from './user-auth-service';
+import { ConfirmRegistrationEmail } from './confirm-registration-email/confirm-registration-email';
 
 
 @Component({
   selector: 'app-user-auth-screen',
-  imports: [Login, ResetPassword, Register],
+  imports: [Login, ResetPassword, Register, ConfirmRegistrationEmail],
   templateUrl: './user-auth-screen.html',
   styleUrl: './user-auth-screen.css',
 })

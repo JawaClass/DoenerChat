@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -30,8 +31,20 @@ public class UserLoginService {
 
     private final AuthenticationManager authenticationManager;
 
-    public record LoginRequest(String email, String password) {
+    public record LoginRequest(@Email String email, String password) {
     }
+
+
+    public record ResetPasswordRequest(@Email String email) {
+    }
+
+    public record ResetPasswordVerifyTokenRequest(String token) {
+    }
+
+    public record UpdatePasswordRequest(String newPassword, String token) {
+    }
+
+
 
     public Authentication login(LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
 

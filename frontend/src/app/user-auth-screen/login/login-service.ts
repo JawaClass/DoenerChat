@@ -1,6 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { BaseService } from '../../base-service';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, interval, tap, throwError } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 interface LoginStatus {
   loggedIn: boolean;

@@ -16,5 +16,6 @@
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
     // "editor.defaultFormatter": "wx-chevalier.google-java-format"
-  }
+  },
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

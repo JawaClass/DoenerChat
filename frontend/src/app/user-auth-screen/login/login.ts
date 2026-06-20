@@ -8,7 +8,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideEyeOff, lucideEye } from '@ng-icons/lucide';
 import { HlmInputGroup, HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { LoginService } from './login-service';
-import { form, FormField, required } from '@angular/forms/signals';
+import { form, FormField, required, email } from '@angular/forms/signals';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { UserAuthService } from '../user-auth-service';
 
@@ -49,13 +49,15 @@ export class Login {
   });
 
   readonly loginForm = form(this.loginModel, (schemaPath) => {
-    required(schemaPath.email, { message: 'Bitte Feld ausfuellen' });
-    required(schemaPath.password, { message: 'Bitte Feld asufuellen' });
+    required(schemaPath.email, { message: 'Bitte Feld ausfüllen' });
+    email(schemaPath.email, { message: 'Bitte eine gültige E-Mail-Adresse eintragen' });
+    required(schemaPath.password, { message: 'Bitte Feld asufüllen' });
   });
 
   protected readonly showPassword = signal(false);
 
   openRegisterScreen() {
+    // this.loginForm.password
     this.authService.setScreen('Register');
   }
 

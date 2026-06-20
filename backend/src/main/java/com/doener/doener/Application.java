@@ -2,7 +2,12 @@ package com.doener.doener;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
+/**
+ * enable @Async decorator globally
+ */
+@EnableAsync
 @SpringBootApplication
 public class Application {
 

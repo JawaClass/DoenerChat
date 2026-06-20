@@ -11,13 +11,17 @@ import { HlmAlert } from '@spartan-ng/helm/alert';
 
 import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmInputImports } from '@spartan-ng/helm/input';
-import { form, FormField, required } from '@angular/forms/signals';
+import { email, form, FormField, required } from '@angular/forms/signals';
 import { UserAuthService } from '../user-auth-service';
 
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { RegisterService } from './register-service';
 import { lucideEyeOff, lucideEye } from '@ng-icons/lucide';
 import { HttpErrorResponse } from '@angular/common/http';
+import {
+  BackendResponseError,
+  BackendResponseErrorSchema,
+} from '../../shares/backend-response-error';
 
 interface RegisterData {
   email: string;
@@ -57,13 +61,14 @@ export class Register {
   });
 
   readonly registerForm = form(this.registerModel, (schemaPath) => {
-    required(schemaPath.email, { message: 'Bitte Feld ausfuellen' });
-    required(schemaPath.password, { message: 'Bitte Feld asufuellen' });
+    required(schemaPath.email, { message: 'Bitte Feld ausfüllen' });
+    email(schemaPath.email, { message: 'Bitte eine gültige E-Mail-Adresse eintragen' });
+    required(schemaPath.password, { message: 'Bitte Feld asufüllen' });
   });
 
   protected readonly showPassword = signal(false);
 
-  readonly registrationError = signal<null | any>(null);
+  readonly registrationError = signal<null | BackendResponseError>(null);
 
   readonly registrationFailed = computed(() => this.registrationError() !== null);
 
@@ -78,10 +83,15 @@ export class Register {
     this.registerService.registerAccount(form.email, form.password).subscribe({
       next: (result) => {
         console.log('Register Account result', result);
+
+        this.registrationError.set(null);
+        this.authService.setScreen('ConfirmRegistrationEmail');
       },
-      error: (err: HttpErrorResponse) => {
-        console.log('Registration failed', err.error);
-        this.registrationError.set(err.error);
+      error: (httpError: HttpErrorResponse) => {
+        console.log('ZOD parse', httpError.error);
+        const error = BackendResponseErrorSchema.parse(httpError.error);
+        console.log('Registration failed ZOD', error);
+        this.registrationError.set(error);
       },
     });
   }

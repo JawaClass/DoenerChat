@@ -1,5 +1,6 @@
 package com.doener.doener.features.user;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -47,6 +48,10 @@ public class User extends TableDefaultEntity implements UserDetails {
     private String email;
 
     private Boolean emailConfirmed;
+
+    private String emailConfirmToken;
+
+    private LocalDateTime emailConfirmTokenCreateTime;
 
     @Column(nullable = true)
     private String name;

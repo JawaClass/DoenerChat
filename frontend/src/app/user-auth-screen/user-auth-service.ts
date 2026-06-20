@@ -1,7 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { BrnDialogRef } from '@spartan-ng/brain/dialog';
 
-export type AuthScreen = 'Login' | 'ResetPassword' | 'Register';
+export type AuthScreen = 'Login' | 'ResetPassword' | 'Register' | 'ConfirmRegistrationEmail';
 
 @Injectable({
   providedIn: 'root',

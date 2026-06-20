@@ -32,7 +32,9 @@ public class SecurityConfig {
 				.csrf(x -> x.disable())
 				.userDetailsService(userDetailsServiceImpl)
 				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers("/", "/api/auth/login", "/api/auth/register", "/api/auth/status").permitAll()
+						.requestMatchers("/", "/api/auth/login", "/api/auth/register", "/api/auth/status",
+								"/api/auth/password/reset/**")
+						.permitAll()
 						.anyRequest().authenticated());
 
 		return http.build();

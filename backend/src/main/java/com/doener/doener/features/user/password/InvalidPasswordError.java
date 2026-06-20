@@ -11,7 +11,7 @@ public class InvalidPasswordError extends DoenerException {
     private final PasswordDeniedResult result;
 
     public InvalidPasswordError(PasswordDeniedResult result) {
-        super(result.toString());
+        super(result.toString(), "INVALID_PASSWORD");
         this.result = result;
     }
 

@@ -28,8 +28,6 @@ public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepo;
-    private final UserPasswordHandler userPasswordHandler;
-    private final UserPasswordService userPasswordService;
     private final UserSocialAccountRepository userSocialAccountRepository;
     private final UserAddressRepository userAddressRepository;
 
@@ -47,15 +45,6 @@ public class UserService {
 
     public User save(User user) {
         return userRepo.save(user);
-    }
-
-    public User createLocalUserWithPassword(User user, String password) {
-
-        var savedUser = save(user);
-        UserPassword userPassword = userPasswordHandler.createForUser(user, password);
-
-        userPasswordService.save(userPassword);
-        return savedUser;
     }
 
     public User createSocialUser(User user, UserSocialRegistrationRequest social) {

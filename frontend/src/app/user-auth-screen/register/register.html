@@ -1,52 +1,60 @@
 <hlm-dialog-header class="mb-4">
   <h1 class="text-xl" hlmDialogTitle>Registrieren</h1>
 </hlm-dialog-header>
-<hlm-field-group class="color-errors">
-  <hlm-field>
-    <label hlmFieldLabel for="email">Email</label>
-    <input hlmInput id="email" [formField]="registerForm.email" />
 
-    <hlm-field-error [forceShow]="registerForm.email().invalid() && registerForm.email().touched()">
-      @for (error of registerForm.email().errors(); track error.kind) {
-        <span>{{ error.message }}</span>
-      }
-    </hlm-field-error>
-  </hlm-field>
-  <hlm-field>
-    <label hlmFieldLabel for="password">Passwort</label>
-    <hlm-input-group>
-      <input
-        hlmInputGroupInput
-        [type]="showPassword() ? null : 'password'"
-        id="password"
-        [formField]="registerForm.password"
-      />
-      <hlm-input-group-addon align="inline-end">
-        <button
-          hlmBtn
-          size="icon"
-          variant="outline"
-          (click)="toggleShowPassword()"
-          class="border-none h-fit"
-        >
-          <ng-icon [name]="showPassword() ? 'lucideEye' : 'lucideEyeOff'" />
-        </button>
-      </hlm-input-group-addon>
-    </hlm-input-group>
+<div>browser proposes password?</div>
+<form>
+  <hlm-field-group class="color-errors">
+    <hlm-field>
+      <label hlmFieldLabel for="email">Email</label>
+      <input hlmInput id="email" [formField]="registerForm.email" />
 
-    <hlm-field-error
-      [forceShow]="registerForm.password().invalid() && registerForm.password().touched()"
-    >
-      @for (error of registerForm.password().errors(); track error.kind) {
-        <span>{{ error.message }}</span>
-      }
-    </hlm-field-error>
-  </hlm-field>
-</hlm-field-group>
+      <hlm-field-error
+        [forceShow]="registerForm.email().invalid() && registerForm.email().touched()"
+      >
+        @for (error of registerForm.email().errors(); track error.kind) {
+          <span>{{ error.message }}</span>
+        }
+      </hlm-field-error>
+    </hlm-field>
+    <hlm-field>
+      <label hlmFieldLabel for="password">Passwort</label>
+      <hlm-input-group>
+        <input
+          hlmInputGroupInput
+          [type]="showPassword() ? null : 'password'"
+          id="password"
+          autocomplete="new-password"
+          [formField]="registerForm.password"
+        />
+        <hlm-input-group-addon align="inline-end">
+          <button
+            hlmBtn
+            size="icon"
+            variant="outline"
+            (click)="toggleShowPassword()"
+            class="border-none h-fit"
+          >
+            <ng-icon [name]="showPassword() ? 'lucideEyeOff' : 'lucideEye'" />
+          </button>
+        </hlm-input-group-addon>
+      </hlm-input-group>
 
-@if (registrationFailed()) {
+      <hlm-field-error
+        [forceShow]="registerForm.password().invalid() && registerForm.password().touched()"
+      >
+        @for (error of registerForm.password().errors(); track error.kind) {
+          <span>{{ error.message }}</span>
+        }
+      </hlm-field-error>
+    </hlm-field>
+  </hlm-field-group>
+</form>
+
+@let registrationError_ = registrationError();
+@if (registrationError_) {
   <hlm-alert variant="destructive">
-    <h4 hlmAlertTitle>Bitte Eingabe korrigieren</h4>
+    <h4 hlmAlertTitle>{{ registrationError_.message }}</h4>
   </hlm-alert>
 }
 

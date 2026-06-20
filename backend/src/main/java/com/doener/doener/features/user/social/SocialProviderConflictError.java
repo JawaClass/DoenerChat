@@ -8,7 +8,7 @@ import lombok.Getter;
 public class SocialProviderConflictError extends DoenerException {
 
     public SocialProviderConflictError(String msg) {
-        super(msg);
+        super(msg, "SOCIAL_CONFLICT");
     }
 
 }

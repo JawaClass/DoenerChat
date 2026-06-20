@@ -19,7 +19,7 @@ public class UserRegistrationController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserRegistrationController.class);
 
-    private final UserRegistrationService userRegistrationService;
+    private final UserRegistrationFacade userRegistrationFacade;
 
 
     @PostMapping("/register")
@@ -27,7 +27,7 @@ public class UserRegistrationController {
 
             logger.info("register user: {}", registerRequest);
 
-            var createdUser = userRegistrationService.registerUser(registerRequest);
+            var createdUser = userRegistrationFacade.registerAndSendConfirmationEmail(registerRequest);
         
             return ResponseEntity.ok().build();
         }

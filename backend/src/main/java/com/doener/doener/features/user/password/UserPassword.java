@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user_password")
-@Data // Generates getters, setters, toString, equals, hashCode
-@NoArgsConstructor // Default constructor required by JPA
-@AllArgsConstructor // Constructor with all fields
-@Builder // Optional: allows Merchant.builder().name("foo").build()
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserPassword extends TableDefaultEntity {
 
     @OneToOne
@@ -25,8 +25,5 @@ public class UserPassword extends TableDefaultEntity {
 
     @Column(nullable = false)
     private String passwordHashed;
-
-    // @Column(nullable = false)
-    // private String passwordSalt;
 
 }
