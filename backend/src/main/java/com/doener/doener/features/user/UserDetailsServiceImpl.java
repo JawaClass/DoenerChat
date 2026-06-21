@@ -39,10 +39,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     "No password found for user: %s. Or if this is oAuth social login eg Google, change this error throwns here..."
                             .formatted(username));
         }
+        var passwordHashed = userPassword.isEmpty() ? null : userPassword.get().getPasswordHashed();
 
-        userPassword.ifPresent(pw -> user.set_password(pw.getPasswordHashed()));
+        AuthenticatedSessionUser userDetails = new AuthenticatedSessionUser(user, passwordHashed);
 
-        return user;
+        return userDetails;
     }
 
 }

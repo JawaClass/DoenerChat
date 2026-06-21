@@ -1,6 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { BaseService } from '../../base-service';
-import { catchError, interval, tap, throwError } from 'rxjs';
+import { catchError, interval, of, shareReplay, tap, throwError, timeout } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 interface LoginStatus {
@@ -21,16 +21,25 @@ export class LoginService extends BaseService {
 
   readonly isLoggedIn = computed(() => this._loggedInUser() != null);
 
+  private readonly lodginStatus$ = this.httpClient.get<LoginStatus>('/api/auth/status').pipe(
+    timeout(1000),
+    tap((status) => {
+      if (status.loggedIn) {
+        this._loggedInUser.set(status.user);
+      } else {
+        this._loggedInUser.set(null);
+      }
+    }),
+    catchError((err) => {
+      console.warn('Cant eval user authentication... Backend down?');
+      this._loggedInUser.set(null);
+      return of(null);
+    }),
+    shareReplay(1),
+  );
+
   evalLoginStatus() {
-    return this.httpClient.get<LoginStatus>('/api/auth/status').pipe(
-      tap((status) => {
-        if (status.loggedIn) {
-          this._loggedInUser.set(status.user);
-        } else {
-          this._loggedInUser.set(null);
-        }
-      }),
-    );
+    return this.lodginStatus$;
   }
 
   login(email: string, password: string) {

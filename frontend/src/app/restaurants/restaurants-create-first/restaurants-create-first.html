@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-6 max-w-[80ch] items-center m-auto">
+  <h1 class="text-4xl font-bold">Willkommen {{ user() }}</h1>
+
+  <div class="text-gray-700 flex flex-col items-center">
+    <p class="text-gray-700 text-xl font-bold">Deine Reise mit DönerChat beginnt!</p>
+
+    <p>Erstelle dein erstes Restaurant in dem du unten auf das abgebildete Restaurant klickst..</p>
+  </div>
+</div>
+
+<div
+  class="relative overflow-hidden inline-block group cursor-pointer"
+  (click)="createRestaurant()"
+>
+  <img class="block" src="restaurant-onboarding-illustration.png" />
+  <div
+    class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg]"
+  ></div>
+</div>

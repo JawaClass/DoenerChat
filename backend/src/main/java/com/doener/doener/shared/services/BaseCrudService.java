@@ -1,17 +1,16 @@
 package com.doener.doener.shared.services;
 
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public abstract class BaseCrudService<T, ID> {
-   
-    protected final JpaRepository<T, ID> repository;
+public abstract class BaseCrudService<T, ID, R extends JpaRepository<T, ID>> {
 
-    protected BaseCrudService(JpaRepository<T, ID> repository) {
+    protected final R repository;
+
+    protected BaseCrudService(R repository) {
         this.repository = repository;
     }
 

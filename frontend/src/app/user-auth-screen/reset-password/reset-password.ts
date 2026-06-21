@@ -1,18 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { form, FormField, required } from '@angular/forms/signals';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideArrowLeft, lucideClock } from '@ng-icons/lucide';
+import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
-import { HlmDialogImports, HlmDialogTitle } from '@spartan-ng/helm/dialog';
+import { HlmDialogImports } from '@spartan-ng/helm/dialog';
 import { HlmFieldError, HlmFieldImports } from '@spartan-ng/helm/field';
 import { HlmInputImports } from '@spartan-ng/helm/input';
-import { HlmIcon } from '@spartan-ng/helm/icon';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideEyeOff, lucideEye, lucideArrowLeft, lucideClock } from '@ng-icons/lucide';
-import { HlmInputGroup, HlmInputGroupImports } from '@spartan-ng/helm/input-group';
-import { form, FormField, required } from '@angular/forms/signals';
-import { HlmAlertImports } from '@spartan-ng/helm/alert';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { UserAuthService } from '../user-auth-service';
-import { LoginService } from '../login/login-service';
 import { ResetPasswordService } from './reset-password-service';
-import { PasswordInputField } from "../../password-input-field/password-input-field";
 
 interface ResetPasswordData {
   email: string;
@@ -31,8 +28,7 @@ interface ResetPasswordData {
     FormField,
     HlmFieldError,
     HlmAlertImports,
-    PasswordInputField
-],
+  ],
   providers: [provideIcons({ lucideArrowLeft, lucideClock })],
   styleUrl: './reset-password.css',
 })

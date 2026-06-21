@@ -10,12 +10,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "addon_meals")
 @Data // Generates getters, setters, toString, equals, hashCode
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor // Default constructor required by JPA
 @SuperBuilder
 public class MealExtra extends BaseMeal {

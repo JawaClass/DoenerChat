@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import com.doener.doener.shared.services.BaseCrudService;
 
 @Service
-public class MainMealService extends BaseCrudService<MainMeal, Long> {
+public class MainMealService extends BaseCrudService<MainMeal, Long, MainMealRepository> {
 
     protected MainMealService(MainMealRepository repository) {
         super(repository);
     }
 
     private static final Logger logger = LoggerFactory.getLogger(MainMealService.class);
- 
+
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.doener.doener.features.user.AuthenticatedSessionUser;
+import com.doener.doener.features.user.UserService;
 import com.doener.doener.features.user.login.UserLoginService.LoginRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,14 +38,24 @@ public class UserLoginController {
         return authentication;
     }
 
+    private final UserService userService;
+
     @GetMapping("/status")
     public Map<String, Object> authStatus(Authentication authentication) {
         boolean loggedIn = authentication != null && authentication.isAuthenticated();
 
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("loggedIn", loggedIn);
-        result.put("user", loggedIn ? authentication.getName() : null);
-        return result;
+        if (loggedIn) {
+            var principal = (AuthenticatedSessionUser) authentication.getPrincipal();
+            var user = userService.findById(principal.getId()).orElse(null);
+            if (user == null) {
+                // session refers to a user that no longer exists — treat as logged out
+                return Map.of("loggedIn", false);
+            }
+
+            return Map.of("loggedIn", true, "user", user.getEmail());
+        }
+
+        return Map.of("loggedIn", false);
     }
 
     @PostMapping("/login")
@@ -70,6 +82,5 @@ public class UserLoginController {
 
         return ResponseEntity.accepted().build();
     }
-
 
 }

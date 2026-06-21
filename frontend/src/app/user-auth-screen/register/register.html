@@ -3,7 +3,7 @@
 </hlm-dialog-header>
 
 <div>browser proposes password?</div>
-<form>
+<form (submit)="$event.preventDefault()">
   <hlm-field-group class="color-errors">
     <hlm-field>
       <label hlmFieldLabel for="email">Email</label>

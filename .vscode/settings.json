@@ -1,6 +1,5 @@
 {
   "editor.formatOnSave": true,
-
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -17,5 +16,6 @@
     "editor.defaultFormatter": "redhat.java"
     // "editor.defaultFormatter": "wx-chevalier.google-java-format"
   },
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.debug.settings.onBuildFailureProceed": true
 }

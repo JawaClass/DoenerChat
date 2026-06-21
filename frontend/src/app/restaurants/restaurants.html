@@ -1,0 +1,16 @@
+<p>restaurants works!</p>
+
+@if (restaurants.isLoading()) {
+  loading...
+}
+
+@if (restaurants.hasValue()) {
+  {{ restaurants.value().length }}
+  @if (restaurants.value().length === 0) {
+    <app-restaurants-create-first class="m-auto" />
+  }
+
+  @if (restaurants.value().length > 0) {
+    <app-restaurants-list />
+  }
+}

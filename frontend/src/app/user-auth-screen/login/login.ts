@@ -11,6 +11,7 @@ import { LoginService } from './login-service';
 import { form, FormField, required, email } from '@angular/forms/signals';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { UserAuthService } from '../user-auth-service';
+import { Router } from '@angular/router';
 
 interface LoginData {
   email: string;
@@ -38,7 +39,7 @@ interface LoginData {
 })
 export class Login {
   private readonly loginService = inject(LoginService);
-
+  private readonly router = inject(Router);
   private readonly authService = inject(UserAuthService);
 
   readonly loginFailed = signal(false);
@@ -81,6 +82,7 @@ export class Login {
       complete: () => {
         this.loginFailed.set(false);
         this.authService.closeDialog();
+        this.router.navigate(['/restaurants']);
       },
     });
   }

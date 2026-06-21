@@ -4,23 +4,21 @@ import com.doener.doener.features.address.Address;
 import com.doener.doener.features.user.User;
 import com.doener.doener.shared.models.TableDefaultEntity;
 
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = { "user_id", "address_id" })
 })
 @Builder
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class UserAddress extends TableDefaultEntity {
 

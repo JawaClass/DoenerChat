@@ -9,7 +9,7 @@ import com.doener.doener.shared.services.BaseCrudService;
 import lombok.AllArgsConstructor;
 
 @Service
-public class MediaService extends BaseCrudService<Media, Long> {
+public class MediaService extends BaseCrudService<Media, Long, MediaRepository> {
 
     private static final Logger logger = LoggerFactory.getLogger(MediaService.class);
 

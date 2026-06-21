@@ -10,8 +10,4 @@ import com.doener.doener.shared.services.BaseCrudService;
 @RequestMapping("/api/media")
 public class MediaController extends BaseCrudController<Media> {
 
-    public MediaController(BaseCrudService<Media, Long> service) {
-        super(service);
-    }
-
 }

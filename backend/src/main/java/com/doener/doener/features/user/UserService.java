@@ -10,9 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.doener.doener.features.address.Address;
 import com.doener.doener.features.user.address.UserAddress;
 import com.doener.doener.features.user.address.UserAddressRepository;
-import com.doener.doener.features.user.password.UserPassword;
-import com.doener.doener.features.user.password.UserPasswordHandler;
-import com.doener.doener.features.user.password.UserPasswordService;
 import com.doener.doener.features.user.registration.IUserRegistrationRequest.UserSocialRegistrationRequest;
 import com.doener.doener.features.user.social.SocialProviderConflictError;
 import com.doener.doener.features.user.social.UserSocialAccount;
@@ -39,8 +36,8 @@ public class UserService {
         return userRepo.findByEmail(email);
     }
 
-    public User getUserById(Long id) {
-        return userRepo.findById(id).orElse(null);
+    public Optional<User> findById(Long id) {
+        return userRepo.findById(id);
     }
 
     public User save(User user) {

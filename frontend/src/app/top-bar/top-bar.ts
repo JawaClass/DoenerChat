@@ -21,6 +21,7 @@ import { UserAuthScreen } from '../user-auth-screen/user-auth-screen';
 import { AuthScreen, UserAuthService } from '../user-auth-screen/user-auth-service';
 import { MealService } from '../meal-service';
 import { LoginService } from '../user-auth-screen/login/login-service';
+import { RestaurantService } from '../restaurants/restaurant-service';
 @Component({
   selector: 'app-top-bar',
   imports: [
@@ -43,6 +44,7 @@ export class TopBar {
   private readonly menuItemService = inject(MenuItemsService);
 
   private readonly mealsService = inject(MealService);
+  private readonly restaurantService = inject(RestaurantService);
 
   private readonly dialog = inject(MatDialog);
 
@@ -55,10 +57,10 @@ export class TopBar {
 
   readonly isLoggedIn = this.loginService.isLoggedIn;
 
-  fetchMeals() {
-    this.mealsService.getMeals().subscribe((meals) => {
-      console.log('meals', meals);
-    });
+  fetchRestaurants() {
+    this.restaurantService.loadRestaurants();
+    const restaurants = this.restaurantService.restaurants.value();
+    console.log('restaurants', restaurants);
   }
 
   openAuthDialog(screen: AuthScreen) {

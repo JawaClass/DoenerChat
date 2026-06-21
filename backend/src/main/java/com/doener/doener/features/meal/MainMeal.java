@@ -15,16 +15,16 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "main_meals")
-@NoArgsConstructor // Default constructor required by JPA
-@AllArgsConstructor // Constructor with all fields
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 public class MainMeal extends BaseMeal {
 

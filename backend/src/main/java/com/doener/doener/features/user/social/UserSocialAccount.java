@@ -13,11 +13,13 @@ import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user_social_account", uniqueConstraints = @UniqueConstraint(columnNames = { "user_id", "provider" }))
 @Data // Generates getters, setters, toString, equals, hashCode
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor // Default constructor required by JPA
 @AllArgsConstructor // Constructor with all fields
 @Builder // Optional: allows Merchant.builder().name("foo").build()

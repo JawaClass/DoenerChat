@@ -1,10 +1,8 @@
 package com.doener.doener.features.meal;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import com.doener.doener.shared.models.Currency;
-import com.doener.doener.shared.models.MealType;
 import com.doener.doener.shared.models.TableDefaultEntity;
 
 import jakarta.persistence.Column;
@@ -12,16 +10,17 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 @SuperBuilder
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
 public abstract class BaseMeal extends TableDefaultEntity {
 
     @Column(nullable = false)
@@ -38,6 +37,7 @@ public abstract class BaseMeal extends TableDefaultEntity {
 
     @Enumerated(EnumType.STRING) // Store as VARCHAR in DB
     @Column(nullable = false)
+    @Builder.Default
     private Currency currency = Currency.EUR;
 
     @PrePersist
