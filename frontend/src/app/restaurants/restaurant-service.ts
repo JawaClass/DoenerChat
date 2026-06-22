@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { BaseService } from '../base-service';
+import { tap } from 'rxjs';
 
 export interface Restaurant {
   id: number;
@@ -29,6 +30,10 @@ export class RestaurantService extends BaseService {
   }
 
   createRestaurant(restaurant: Restaurant) {
-    return this.httpClient.post(this.restaurantsUrl, restaurant);
+    return this.httpClient.post(this.restaurantsUrl, restaurant).pipe(
+      tap(() => {
+        this.loadRestaurants();
+      }),
+    );
   }
 }

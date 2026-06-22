@@ -4,11 +4,11 @@ import {
   MenuboardDisplayMode,
 } from '../menuboard-display-mode/menuboard-display-mode';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { EditModeService } from '../shares/services/edit-mode-service';
+import { EditModeService } from '../shared/services/edit-mode-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
-import { MenuItemsService } from '../shares/services/menu-items-service';
+import { MenuItemsService } from '../shared/services/menu-items-service';
 import { LucideArrowDownWideNarrow } from '@lucide/angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,6 +22,8 @@ import { AuthScreen, UserAuthService } from '../user-auth-screen/user-auth-servi
 import { MealService } from '../meal-service';
 import { LoginService } from '../user-auth-screen/login/login-service';
 import { RestaurantService } from '../restaurants/restaurant-service';
+import { LoadingSpinner } from "../shared/components/loading-spinner/loading-spinner";
+import { LoadingStateService } from '../shared/services/loading-state-service';
 @Component({
   selector: 'app-top-bar',
   imports: [
@@ -32,7 +34,8 @@ import { RestaurantService } from '../restaurants/restaurant-service';
     MatMenuModule,
     SortByMenuSettings,
     HlmButtonImports,
-  ],
+    LoadingSpinner
+],
   templateUrl: './top-bar.html',
   styleUrl: './top-bar.css',
 })
@@ -49,6 +52,7 @@ export class TopBar {
   private readonly dialog = inject(MatDialog);
 
   private readonly _hlmDialogService = inject(HlmDialogService);
+  private readonly loadingStateService = inject(LoadingStateService)
 
   private readonly authService = inject(UserAuthService);
   private readonly loginService = inject(LoginService);
@@ -56,6 +60,8 @@ export class TopBar {
   readonly loggedInUser = this.loginService.loggedInUser;
 
   readonly isLoggedIn = this.loginService.isLoggedIn;
+
+  readonly isLoading = this.loadingStateService.isLoading
 
   fetchRestaurants() {
     this.restaurantService.loadRestaurants();

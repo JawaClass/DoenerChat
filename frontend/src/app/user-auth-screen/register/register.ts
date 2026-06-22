@@ -21,7 +21,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {
   BackendResponseError,
   BackendResponseErrorSchema,
-} from '../../shares/backend-response-error';
+} from '../../shared/backend-response-error';
 
 interface RegisterData {
   email: string;

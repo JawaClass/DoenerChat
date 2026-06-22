@@ -8,14 +8,22 @@ import { provideRouter } from '@angular/router';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
-import { httpInterceptorInterceptor } from './http-interceptor-interceptor';
+import { httApiAddBaseUrlInterceptor } from './config/http-add-base-url-interceptor';
 import { GlobalErrorHandler } from './config/global-error-handler';
+import { httpErrorResponseMappingInterceptor } from './config/http-error-response-mapping-interceptor';
+import { httpLoadingStateInterceptor } from './config/http-loading-state-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([httpInterceptorInterceptor])),
+    provideHttpClient(
+      withInterceptors([
+        httApiAddBaseUrlInterceptor,
+        httpErrorResponseMappingInterceptor,
+        httpLoadingStateInterceptor,
+      ]),
+    ),
     provideAppInitializer(() => {}),
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],

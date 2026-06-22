@@ -10,6 +10,7 @@ import { HlmInputImports } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { PasswordInputField } from '../password-input-field/password-input-field';
 import { PasswordResetService } from './password-reset-service';
+import { Router } from '@angular/router';
 
 interface ResetpasswordData {
   password: string;
@@ -34,6 +35,7 @@ export class PasswordResetForwarding {
   private readonly passwordResetService = inject(PasswordResetService);
 
   readonly isResetTokenValid = signal(true);
+  private readonly router = inject(Router);
 
   constructor() {
     /**
@@ -75,8 +77,11 @@ export class PasswordResetForwarding {
 
   changePassword() {
     const newPassword = this.resetPasswordModel().password;
-    this.passwordResetService.changePassword(newPassword).subscribe((result) => {
-      console.log('change password result', result);
+    this.passwordResetService.changePassword(newPassword).subscribe({
+      next: (result) => {
+        this.router.navigate(['/homepage']);
+      },
+      error: (err) => {},
     });
   }
 }

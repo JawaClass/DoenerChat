@@ -1,0 +1,29 @@
+<div class="pb-8">
+  <h2 class="text-xl font-medium">Neues Restaurant anlegen</h2>
+  <hlm-separator />
+</div>
+
+<form (submit)="$event.preventDefault()">
+  <hlm-field-group>
+    <hlm-field>
+      <label hlmFieldLabel for="fieldgroup-name">Name des Restaurants</label>
+      <input
+        hlmInput
+        id="fieldgroup-name"
+        placeholder="Grosse Krabbe"
+        [formField]="restraurantForm.name"
+      />
+    </hlm-field>
+
+    <app-address-form [address]="restraurantForm.address" />
+
+    <hlm-field orientation="horizontal">
+      <button hlmBtn variant="outline" type="reset" [disabled]="uiFreezed()">Reset</button>
+      <button hlmBtn type="submit" (click)="createNewRestaurant()" [disabled]="uiFreezed()">
+        Submit
+      </button>
+    </hlm-field>
+  </hlm-field-group>
+
+  <div>new restaurant valid ? {{ restraurantForm().valid() }}</div>
+</form>

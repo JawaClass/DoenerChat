@@ -1,0 +1,27 @@
+@let address_ = address();
+
+<hlm-field-group>
+  <div class="flex gap-4">
+    <hlm-field>
+      <label hlmFieldLabel for="fieldgroup-email">Postleitzahl</label>
+      <input hlmInput id="fieldgroup-email" [formField]="address_.zipCode" />
+    </hlm-field>
+    <hlm-field>
+      <label hlmFieldLabel for="fieldgroup-name">Stadt</label>
+      <input hlmInput id="fieldgroup-name" [formField]="address_.city" />
+    </hlm-field>
+  </div>
+  <div class="flex gap-4">
+    <hlm-field>
+      <label hlmFieldLabel for="fieldgroup-email">Strasse</label>
+      <input hlmInput id="fieldgroup-email" [formField]="address_.street" />
+    </hlm-field>
+
+    <hlm-field>
+      <label hlmFieldLabel for="fieldgroup-email">Strassennummer</label>
+      <input hlmInput id="fieldgroup-email" [formField]="address_.streetNo" />
+    </hlm-field>
+  </div>
+</hlm-field-group>
+
+<div>address valid ? {{ address_().valid() }}</div>

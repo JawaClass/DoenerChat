@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { environment } from './../environments/environment.development';
-export const httpInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
+import { environment } from '../../environments/environment.development';
+export const httApiAddBaseUrlInterceptor: HttpInterceptorFn = (req, next) => {
   console.log('http interceptor....', req.url);
   // Don't modify absolute URLs
   if (req.url.startsWith('http')) {

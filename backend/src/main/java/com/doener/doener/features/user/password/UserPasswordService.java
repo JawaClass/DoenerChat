@@ -23,6 +23,7 @@ public class UserPasswordService {
     private final UserService userService;
     private final UserPasswordHandler userPasswordHandler;
 
+    @Transactional
     public UserPassword updatePassword(String newPassword, String resetPasswordToken) {
         var dbToken = passwordResetTokenService.findValidTokenOrThrow(resetPasswordToken);
         var email = dbToken.getEmail();
@@ -32,6 +33,9 @@ public class UserPasswordService {
 
         var newPasswordHashed = userPasswordHandler.encodePassword(newPassword);
         userPassword.setPasswordHashed(newPasswordHashed);
+        userPasswordRepository.save(userPassword);
+
+        passwordResetTokenService.deleteByToken(resetPasswordToken);
         return userPassword;
     }
 

@@ -1,8 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuBoardDisplayItem } from './menu-board/menu-board';
-import { MenuItemGroup, MenuItemsService } from './shares/services/menu-items-service';
-import { OrderSelectionService } from './shares/services/order-selection-service';
+import { MenuItemGroup, MenuItemsService } from './shared/services/menu-items-service';
+import { OrderSelectionService } from './shared/services/order-selection-service';
 import { TopBar } from './top-bar/top-bar';
 
 @Component({

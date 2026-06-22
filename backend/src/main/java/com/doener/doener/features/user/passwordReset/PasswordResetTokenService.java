@@ -47,6 +47,15 @@ public class PasswordResetTokenService {
         passwordResetTokenRepository.deleteById(id);
     }
 
+    public void deleteByToken(String token) {
+        var dbToken = passwordResetTokenRepository.findByToken(token);
+        if (dbToken.isEmpty()) {
+            throw new DoenerException("Token not found", "TOKEN_NOT_FOUND");
+        }
+
+        passwordResetTokenRepository.delete(dbToken.get());
+    }
+
     public PasswordResetToken generateNewResetToken(String email) {
         var twoHoursInSeconds = 60 * 60 * 2;
         var expiresAt = Instant.now().plusSeconds(twoHoursInSeconds);

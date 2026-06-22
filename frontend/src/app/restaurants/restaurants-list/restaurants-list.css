@@ -1,0 +1,6 @@
+:host {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* add this */
+}

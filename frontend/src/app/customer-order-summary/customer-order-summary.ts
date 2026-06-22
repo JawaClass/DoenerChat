@@ -1,12 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { BasketMenuItemGroup, OrderSelectionService } from '../shares/services/order-selection-service';
-import { BackItemGroupDisplay } from "../back-item-group-display/back-item-group-display";
-import { MatAnchor } from "@angular/material/button";
-import { VoiceService } from '../shares/services/voice-service';
-import { number2text } from '../shares/services/voice-translation';
-
-
-
+import {
+  BasketMenuItemGroup,
+  OrderSelectionService,
+} from '../shared/services/order-selection-service';
+import { BackItemGroupDisplay } from '../back-item-group-display/back-item-group-display';
+import { MatAnchor } from '@angular/material/button';
+import { VoiceService } from '../shared/services/voice-service';
+import { number2text } from '../shared/services/voice-translation';
 
 @Component({
   selector: 'app-customer-order-summary',
@@ -15,12 +15,11 @@ import { number2text } from '../shares/services/voice-translation';
   styleUrl: './customer-order-summary.css',
 })
 export class CustomerOrderSummary {
+  private readonly service = inject(OrderSelectionService);
 
-  private readonly service = inject(OrderSelectionService)
+  private readonly voiceService = inject(VoiceService);
 
-  private readonly voiceService = inject(VoiceService)
-
-  readonly btnDisabled = computed(() => this.basket.itemsActive().length === 0)
+  readonly btnDisabled = computed(() => this.basket.itemsActive().length === 0);
 
   readonly basket = {
     // itemsActive: () => this.basket.items().filter(item => item.items.filter(x => x.active).length),
@@ -28,32 +27,28 @@ export class CustomerOrderSummary {
     items: this.service.grouped,
     totalPrice: this.service.totalPrice,
     totalPrepTime: this.service.totalPrepTime,
-  }
+  };
 
   textifyBasket(items: BasketMenuItemGroup[]) {
-
-    const lines: string[] = []
+    const lines: string[] = [];
 
     for (const item of items) {
-      const amount = item.items.filter(x => x.active).length
-      const amountAsText = number2text(amount, "DE")
-      lines.push(`${amountAsText} ${item.name}`)
+      const amount = item.items.filter((x) => x.active).length;
+      const amountAsText = number2text(amount, 'DE');
+      lines.push(`${amountAsText} ${item.name}`);
     }
 
-    return lines.join(", ")
-
+    return lines.join(', ');
   }
 
   makeOrder() {
+    const items = this.basket.itemsActive();
+    const itemsGrouped = this.service.groupItemsIntoGroups(items);
 
-    const items = this.basket.itemsActive()
-    const itemsGrouped = this.service.groupItemsIntoGroups(items)
+    const text = this.textifyBasket(itemsGrouped);
 
-    const text = this.textifyBasket(itemsGrouped)
+    console.log(text);
 
-    console.log(text)
-
-    this.voiceService.speak2(`Neu Bestellung!!! ${items.length} Items. ${text}. ENDE`)
+    this.voiceService.speak2(`Neu Bestellung!!! ${items.length} Items. ${text}. ENDE`);
   }
-
 }
