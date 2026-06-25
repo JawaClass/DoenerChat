@@ -52,7 +52,7 @@ export class CreateNewRestaurant {
     const restaurant = this.restaurantModel();
     this.uiFreezed.set(true);
     this.restaurantService
-      .createRestaurant({ id: -1, ...restaurant })
+      .createRestaurant({ id: -1, ...restaurant, uuid: '', restaurantFoodMenus: [] })
       .pipe(finalize(() => this.uiFreezed.set(false)))
       .subscribe();
   }

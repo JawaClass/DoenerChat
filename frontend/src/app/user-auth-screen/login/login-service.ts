@@ -3,6 +3,8 @@ import { BaseService } from '../../base-service';
 import { catchError, interval, of, shareReplay, tap, throwError, timeout } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
+import { toast } from '@spartan-ng/brain/sonner';
+
 interface LoginStatus {
   loggedIn: boolean;
   user: string;
@@ -21,10 +23,14 @@ export class LoginService extends BaseService {
 
   readonly isLoggedIn = computed(() => this._loggedInUser() != null);
 
-  private readonly lodginStatus$ = this.httpClient.get<LoginStatus>('/api/auth/status').pipe(
-    timeout(1000),
+  private readonly loginStatus$ = this.httpClient.get<LoginStatus>('/api/auth/status').pipe(
+    timeout(20_000),
     tap((status) => {
+      console.log('login status', status);
       if (status.loggedIn) {
+        // welcome back
+        toast('Welcome back!');
+
         this._loggedInUser.set(status.user);
       } else {
         this._loggedInUser.set(null);
@@ -39,7 +45,7 @@ export class LoginService extends BaseService {
   );
 
   evalLoginStatus() {
-    return this.lodginStatus$;
+    return this.loginStatus$;
   }
 
   login(email: string, password: string) {

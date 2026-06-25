@@ -7,10 +7,12 @@ import { authGuard } from './config/auth-guard';
 import { Homepage } from './homepage/homepage';
 import { CreateNewRestaurant } from './restaurants/create-new-restaurant/create-new-restaurant';
 import { Employees } from './employees/employees';
+import { RestaurantDetail } from './restaurants/restaurant-detail/restaurant-detail';
 
 export const routes: Routes = [
   { path: 'menu/:name', component: MenuBoardPage }, // Dynamic
   { path: 'account/password-reset', component: PasswordResetForwarding },
+
   {
     path: 'restaurants',
     component: Restaurants,
@@ -20,6 +22,10 @@ export const routes: Routes = [
       {
         path: 'new-restaurant',
         component: CreateNewRestaurant,
+      },
+      {
+        path: ':uuid',
+        component: RestaurantDetail,
       },
     ],
   },

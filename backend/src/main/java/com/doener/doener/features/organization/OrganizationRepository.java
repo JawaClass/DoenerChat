@@ -1,7 +1,7 @@
 package com.doener.doener.features.organization;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.doener.doener.shared.services.BaseCrudRepository;
 
-public interface OrganizationRepository extends JpaRepository<Organization, Long> {
+public interface OrganizationRepository extends BaseCrudRepository<Organization, Long> {
 
 }

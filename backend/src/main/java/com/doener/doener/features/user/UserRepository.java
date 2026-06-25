@@ -2,10 +2,10 @@ package com.doener.doener.features.user;
 
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import com.doener.doener.shared.services.BaseCrudRepository;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends BaseCrudRepository<User, Long> {
 
-            public   Optional<User> findByEmail(String email);
+    public Optional<User> findByEmail(String email);
 
 }

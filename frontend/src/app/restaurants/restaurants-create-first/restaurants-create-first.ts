@@ -22,6 +22,13 @@ export class RestaurantsCreateFirst {
   });
 
   createRestaurant() {
-    this.restaurantService.createRestaurant({ id: -1, name: 'Mein erstes Restaurant' }).subscribe();
+    this.restaurantService
+      .createRestaurant({
+        id: -1,
+        name: 'Mein erstes Restaurant',
+        uuid: '',
+        restaurantFoodMenus: [],
+      })
+      .subscribe();
   }
 }

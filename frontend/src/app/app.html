@@ -15,9 +15,10 @@
         </div>
     </div>
 </div> -->
-<div class="w-full h-full flex flex-col">
-  <app-top-bar class="w-full h-22 bg-amber-300"></app-top-bar>
-  <router-outlet />
+<hlm-toaster />
+<div class="w-dvw h-dvh flex flex-col overflow-clip min-h-0!">
+  <app-top-bar class="w-full h-22 bg-amber-300 min-w-0! min-h-0!"></app-top-bar>
+  <div class="flex flex-1 w-dvw border-4 border-red-500 overflow-x-clip min-w-0! min-h-0!">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-
-<!-- <router-outlet /> -->

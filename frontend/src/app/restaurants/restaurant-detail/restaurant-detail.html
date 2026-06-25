@@ -1,0 +1,35 @@
+<p>restaurant-detail works! {{ uuid() }}</p>
+<h2>Restrauant {{ restaurant().value()?.name }}</h2>
+<hlm-separator />
+
+<h2 class="font-medium text-xl m-auto">Meine Menus</h2>
+
+<!-- <div class="flex flex-1 overflow-x-auto min-w-0! min-h-0! gap-2" appHorizontalScrollDirective> -->
+
+<ng-scrollbar hlm class="flex-1 border whitespace-nowrap" appHorizontalScrollDirective>
+  <div class="flex flex-1 min-w-0! min-h-0! gap-2">
+    <hlm-card class="h-64 w-64 shrink-0">
+      <ng-template #menu>
+        <hlm-dropdown-menu>
+          <button hlmDropdownMenuItem>Manuell anlegen</button>
+          <button hlmDropdownMenuItem>automatisch andhand Foto (KI Modus)</button>
+        </hlm-dropdown-menu>
+      </ng-template>
+
+      <div
+        hlmCardContent
+        class="m-auto font-semibold cursor-pointer"
+        [hlmDropdownMenuTrigger]="menu"
+      >
+        <div class="flex items-center text-xl gap-2">
+          <ng-icon name="lucidePlus" />
+          <span> Neues Menu</span>
+        </div>
+      </div>
+    </hlm-card>
+
+    @for (m of menus(); track $index) {
+      <app-menu-display-item [menu]="m" />
+    }
+  </div>
+</ng-scrollbar>

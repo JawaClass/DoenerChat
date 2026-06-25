@@ -4,10 +4,11 @@ import { MenuBoardDisplayItem } from './menu-board/menu-board';
 import { MenuItemGroup, MenuItemsService } from './shared/services/menu-items-service';
 import { OrderSelectionService } from './shared/services/order-selection-service';
 import { TopBar } from './top-bar/top-bar';
+import { HlmToasterImports } from '@spartan-ng/helm/sonner';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TopBar],
+  imports: [RouterOutlet, TopBar, HlmToasterImports],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

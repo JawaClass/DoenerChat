@@ -1,14 +1,17 @@
 package com.doener.doener.features.restaurant;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.doener.doener.config.auth.CurrentUser;
@@ -40,6 +43,12 @@ public class RestaurantController {
         var restaurants = restaurantService.createForOwner(request, user, organization);
 
         return ResponseEntity.ok(restaurants);
+    }
+
+    @GetMapping("/{uuid}")
+    public ResponseEntity<Restaurant> getByUuid(@CurrentUser User user, @PathVariable UUID uuid) {
+        var restaurant = restaurantService.getByUuidOrThrow(uuid);
+        return ResponseEntity.ok(restaurant);
     }
 
 }

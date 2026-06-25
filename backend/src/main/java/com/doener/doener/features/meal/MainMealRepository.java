@@ -1,8 +1,8 @@
 package com.doener.doener.features.meal;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.doener.doener.shared.services.BaseCrudRepository;
 
-public interface MainMealRepository extends JpaRepository<MainMeal, Long> {
+public interface MainMealRepository extends BaseCrudRepository<MainMeal, Long> {
 
 }
  

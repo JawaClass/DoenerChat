@@ -1,7 +1,7 @@
 package com.doener.doener.features.media;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.doener.doener.shared.services.BaseCrudRepository;
 
-public interface MediaRepository extends JpaRepository<Media, Long> {
+public interface MediaRepository extends BaseCrudRepository<Media, Long> {
 
 }

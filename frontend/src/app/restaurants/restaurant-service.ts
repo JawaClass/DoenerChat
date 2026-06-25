@@ -3,9 +3,21 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { BaseService } from '../base-service';
 import { tap } from 'rxjs';
 
+export interface FoodMenu {
+  name: string;
+  uuid: string
+}
+
+export interface RestaurantFoodMenu {
+  foodMenu: FoodMenu;
+  position: number;
+}
+
 export interface Restaurant {
   id: number;
   name: string;
+  uuid: string;
+  restaurantFoodMenus: RestaurantFoodMenu[];
 }
 
 @Injectable({

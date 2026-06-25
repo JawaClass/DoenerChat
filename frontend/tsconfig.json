@@ -25,7 +25,11 @@
       "@spartan-ng/helm/textarea": ["./libs/ui/textarea/src/index.ts"],
       "@spartan-ng/helm/alert": ["./libs/ui/alert/src/index.ts"],
       "@spartan-ng/helm/item": ["./libs/ui/item/src/index.ts"],
-      "@spartan-ng/helm/spinner": ["./libs/ui/spinner/src/index.ts"]
+      "@spartan-ng/helm/spinner": ["./libs/ui/spinner/src/index.ts"],
+      "@spartan-ng/helm/sonner": ["./libs/ui/sonner/src/index.ts"],
+      "@spartan-ng/helm/card": ["./libs/ui/card/src/index.ts"],
+      "@spartan-ng/helm/dropdown-menu": ["./libs/ui/dropdown-menu/src/index.ts"],
+      "@spartan-ng/helm/scroll-area": ["./libs/ui/scroll-area/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

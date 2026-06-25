@@ -1,0 +1,13 @@
+@let m = menu();
+
+<hlm-card class="h-64 w-64">
+  <hlm-card-header>
+    <h3 hlmCardTitle>{{ m.foodMenu.name }}</h3>
+    <p hlmCardDescription>Card Description</p>
+    <div hlmCardAction>Card Action</div>
+  </hlm-card-header>
+  <div hlmCardContent>Card Content</div>
+  <hlm-card-footer>
+    <button hlmBtn (click)="openMenu()">open</button>
+  </hlm-card-footer>
+</hlm-card>
