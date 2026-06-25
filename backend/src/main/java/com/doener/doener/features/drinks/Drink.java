@@ -1,6 +1,6 @@
 package com.doener.doener.features.drinks;
 
-import com.doener.doener.shared.models.TableDefaultEntity;
+import com.doener.doener.features.meal.BaseMeal;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Drink extends TableDefaultEntity {
+public class Drink extends BaseMeal {
 
     private String sizeInMilliLiter;
 

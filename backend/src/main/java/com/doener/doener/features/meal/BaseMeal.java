@@ -29,6 +29,9 @@ public abstract class BaseMeal extends TableDefaultEntity {
     @Column(nullable = false)
     private Integer calories;
 
+    @Column(nullable = false)
+    private MealCategory category;
+
     @Column(nullable = true)
     private String description;
 
