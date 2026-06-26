@@ -10,6 +10,7 @@ import { HorizontalScrollDirective } from '../../horizontal-scroll-directive';
 import { HlmScrollAreaImports } from '@spartan-ng/helm/scroll-area';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-restaurant-detail',
@@ -34,6 +35,9 @@ export class RestaurantDetail {
   // restaurant uiid from url
   readonly uuid = input.required<string>();
 
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+
   private restaurantDetailService = inject(RestaurantDetailService);
 
   readonly restaurant = computed(() =>
@@ -53,4 +57,8 @@ export class RestaurantDetail {
         { foodMenu: { name: 'Sunday Menu' }, position: 1 },
       ] as RestaurantFoodMenu[],
   );
+
+  createNewMenu() {
+    this.router.navigate(['menus', 'create-new'], { relativeTo: this.route });
+  }
 }

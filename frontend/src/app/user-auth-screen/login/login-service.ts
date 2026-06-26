@@ -45,6 +45,7 @@ export class LoginService extends BaseService {
   );
 
   evalLoginStatus() {
+    console.log('evalLoginStatus');
     return this.loginStatus$;
   }
 

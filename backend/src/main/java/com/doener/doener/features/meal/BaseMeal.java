@@ -8,6 +8,8 @@ import com.doener.doener.shared.models.TableDefaultEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import lombok.Builder;
@@ -29,7 +31,7 @@ public abstract class BaseMeal extends TableDefaultEntity {
     @Column(nullable = false)
     private Integer calories;
 
-    @Column(nullable = false)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     private MealCategory category;
 
     @Column(nullable = true)

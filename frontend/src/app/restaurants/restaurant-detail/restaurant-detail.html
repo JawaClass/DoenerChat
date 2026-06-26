@@ -11,7 +11,7 @@
     <hlm-card class="h-64 w-64 shrink-0">
       <ng-template #menu>
         <hlm-dropdown-menu>
-          <button hlmDropdownMenuItem>Manuell anlegen</button>
+          <button hlmDropdownMenuItem (click)="createNewMenu()">Manuell anlegen</button>
           <button hlmDropdownMenuItem>automatisch andhand Foto (KI Modus)</button>
         </hlm-dropdown-menu>
       </ng-template>

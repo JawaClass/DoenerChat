@@ -1,0 +1,24 @@
+@let m = meal();
+
+<hlm-card class="w-48 h-48">
+  <hlm-card-header>
+    <h3 hlmCardTitle>{{ m.name }}</h3>
+    <!-- <p hlmCardDescription>Enter your email below to login to your account</p> -->
+
+    <div hlmCardAction>
+      <button hlmBtn size="icon" variant="ghost">
+        <ng-icon name="lucideMoreVertical" />
+      </button>
+    </div>
+  </hlm-card-header>
+
+  <div hlmCardContent>
+    <img src=""/>
+  </div>
+
+  <hlm-card-footer class="flex justify-end">
+    <button hlmBtn size="icon" variant="outline">
+      <ng-icon name="lucideArrowRight" />
+    </button>
+  </hlm-card-footer>
+</hlm-card>

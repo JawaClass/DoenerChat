@@ -8,9 +8,10 @@ import { Homepage } from './homepage/homepage';
 import { CreateNewRestaurant } from './restaurants/create-new-restaurant/create-new-restaurant';
 import { Employees } from './employees/employees';
 import { RestaurantDetail } from './restaurants/restaurant-detail/restaurant-detail';
+import { MenuCreateNewForRestaurant } from './menu-create-new-for-restaurant/menu-create-new-for-restaurant';
 
 export const routes: Routes = [
-  { path: 'menu/:name', component: MenuBoardPage }, // Dynamic
+  { path: 'menu/:name', component: MenuBoardPage },
   { path: 'account/password-reset', component: PasswordResetForwarding },
 
   {
@@ -26,6 +27,10 @@ export const routes: Routes = [
       {
         path: ':uuid',
         component: RestaurantDetail,
+      },
+      {
+        path: ':uuid/menus/create-new',
+        component: MenuCreateNewForRestaurant,
       },
     ],
   },
